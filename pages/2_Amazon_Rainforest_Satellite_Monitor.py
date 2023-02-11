@@ -42,11 +42,9 @@ with col5:
 with col6:
     lon = st.slider('Longitude - X', -74.0, -72.0, -73.0)
 
-st.markdown(f"You picked a point at Latitude {lat} and Longitude {lon}. Only images with less than {cloud_cover}% of cloud cover will ")
-
 
 html_str = f"""
-<p class="a">You picked a point at Latitude {lat} and Longitude {lon}. Up to {max_items} images collected between {start_date} and {end_date} and with less than {cloud_cover}% of cloud cover will be considered.")</p>
+<p class="a">You picked a point at Latitude {lat} and Longitude {lon}. Up to {max_items} images collected between {start_date} and {end_date} and with less than {cloud_cover}% of cloud cover will be considered."</p>
 """
 
 st.markdown(html_str, unsafe_allow_html=True)
