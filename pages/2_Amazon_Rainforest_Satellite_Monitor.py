@@ -16,7 +16,9 @@ import io
 # import pystac
 # import pystac_client
 from pystac_client import Client
-from shapely.geometry import Point#, Polygon
+from shapely import geometry 
+
+#import Point#, Polygon
 # from shapely.geometry import Point
 # import rioxarray
 # from rioxarray.merge import merge_arrays
@@ -64,36 +66,17 @@ def chipping(mosaic,dist,overlap):
     chip_df['rgb'] = chip_df.apply(lambda x: mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
     
 
-    chip_df['thumbnail'] = chip_df.apply(lambda x: f"{ x['x_top_left'] }_{ x['y_top_left'] }.jpg", axis=1)
+    # chip_df['thumbnail'] = chip_df.apply(lambda x: f"{ x['x_top_left'] }_{ x['y_top_left'] }.jpg", axis=1)
     
     def create_thumbnail(img_array,name,dist):
         # Create an Image object from the numpy array
-#         img =  PIL.Image.fromarray(img_array)
-
-
-#         with PIL.Image.open(name).convert('RGB') as img:
-
-#             image_array = np.array(img).astype(np.uint8)
-#             augmented_array = augmenter.augment_image(image_array)
-            
         img_jpg = PIL.Image.fromarray(img_array, mode = 'RGB')
-        plt.imshow(img_jpg)
+        # plt.imshow(img_jpg)
         img_jpg.save(f"pics/{name}")
 
-#         img = PIL.Image.frombytes("RGB", (img_array.shape[0], img_array.shape[1]), img_array.tobytes())
-
-        
-#         # Resize the image to create a thumbnail
-#         img.thumbnail((dist, dist), PIL.Image.ANTIALIAS)
-
-
-#         # Save the thumbnail
-#         img.save(name)
     
-    for  ind, chip in chip_df.iterrows():
-#         print(chip)
-#         print(ind)
-        create_thumbnail(chip['rgb'],chip['thumbnail'],dist)
+    # for  ind, chip in chip_df.iterrows():
+    #     create_thumbnail(chip['rgb'],chip['thumbnail'],dist)
     
     
     return chip_df
@@ -101,10 +84,6 @@ def chipping(mosaic,dist,overlap):
 
 
 
-
-# try:
-#     ee.Initialize()
-# except Exception as e:
 def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
     
     start = time.time()
@@ -124,7 +103,7 @@ def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
     # coords =((area[0],area[1]),(area[0],area[3]),(area[2],area[3]),(area[2],area[1]), (area[0],area[1]))
     # point = Polygon(coords)
 
-    point = Point(area[0],area[1])
+    point = geometry.Point(area[0],area[1])
     # download images from S2 AWS bucket
 
     collection = "sentinel-s2-l2a-cogs"  # Sentinel-2, Level 2A, COGs
