@@ -14,7 +14,7 @@ import PIL
 # from google.cloud import storage
 import io
 # import pystac_client
-from pystac-client import Client
+from pystac_client import Client
 from shapely.geometry import Point#, Polygon
 # from shapely.geometry import Point
 # import rioxarray
