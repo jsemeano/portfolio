@@ -2,6 +2,8 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
+from amazon_functions.gee  import authentication
+
 
 st.set_page_config(
     page_title='Amazon_alert',
@@ -53,7 +55,9 @@ st.markdown(html_str, unsafe_allow_html=True)
 
 lat_long_df = pd.DataFrame(data={'lat' : [lat], 'lon': [lon]})
 
+col7, col8, col9 = st.columns(3)
+with col8:
+    st.map(lat_long_df)
 
-st.map(lat_long_df)
-
-
+if st.button('Get mosaic df'):
+    mosaic_df =  authentication.aws_sentinel(max_items, cloud_cover,start_date,end_date,[lat,lon])

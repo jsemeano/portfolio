@@ -109,10 +109,10 @@ def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
     # 3578.46 sqkm close to the point William mentioned (I think)
 
     # area = areas_list[0]
-    coords =((area[0],area[1]),(area[0],area[3]),(area[2],area[3]),(area[2],area[1]), (area[0],area[1]))
-    point = Polygon(coords)
+    # coords =((area[0],area[1]),(area[0],area[3]),(area[2],area[3]),(area[2],area[1]), (area[0],area[1]))
+    # point = Polygon(coords)
 
-
+    point = Point(area[0],area[1])
     # download images from S2 AWS bucket
 
     collection = "sentinel-s2-l2a-cogs"  # Sentinel-2, Level 2A, COGs
