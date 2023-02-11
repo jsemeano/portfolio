@@ -34,8 +34,8 @@ with intro_tab:
 with prof_tab:
 
     with st.expander('Sketch to Image Transformer UI'):
-    st.markdown("""## Let's transform your sketches with our AI! :cat:""")
-    st.write('description bellow- streamlit canvas is not supported inside tabs')
+        st.markdown("""## Let's transform your sketches with our AI! :cat:""")
+        st.write('description bellow- streamlit canvas is not supported inside tabs')
 
 
     # #image_choice = st.radio('I want to see similar:', ('photo', 'sketch'), horizontal = True)
