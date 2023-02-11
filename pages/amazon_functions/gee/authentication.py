@@ -138,14 +138,14 @@ def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
 
     start_mos = time.time()
 
-    item_B04 = [rasterio.open(item.assets['B04'].href) for item in items]
-    mosaic_red, out_trans_red = merge(item_B04)
+    mosaic_red = rasterio.open(items[0].assets['B04'].href) #for item in items]
+    # mosaic_red, out_trans_red = merge(item_B04)
 
-    item_B03 = [rasterio.open(item.assets['B03'].href) for item in items]
-    mosaic_green, out_trans_green = merge(item_B03)
+    mosaic_green = rasterio.open(items[0].assets['B03'].href) #for item in items]
+    # mosaic_green, out_trans_green = merge(item_B03)
 
-    item_B02 = [rasterio.open(item.assets['B02'].href) for item in items]
-    mosaic_blue, out_trans_blue = merge(item_B02)
+    mosaic_blue = rasterio.open(items[0].assets['B02'].href) #for item in items]
+    # mosaic_blue, out_trans_blue = merge(item_B02)
 
     print(f'time to complete mosaics : {time.time()-start_mos} (s)')
         
