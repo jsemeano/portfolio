@@ -14,9 +14,6 @@ st.markdown('''
             ''')
 
 
-
-st.header('My NLP Job Hunt Tool')
-
 prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Education', 'Skills', 'Certificates'])
 
 with prof_tab:
@@ -28,6 +25,12 @@ with prof_tab:
         st.markdown('''
                     * Deforestation alert system : Leveraging of satellite imagery to give an NGO early warning of deforestation activities in the Amazon
                     * Responsible for API building and data infrastructure''')
+            # Apply CSS styling to the text
+        st.write(
+            "<style>.css-1aumxhk { font-style: italic; color: red; }</style>",
+            unsafe_allow_html=True,
+        )
+        st.write("Some styled text inside the expander")
 
 
 
