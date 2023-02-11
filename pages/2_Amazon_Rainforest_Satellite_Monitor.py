@@ -220,8 +220,9 @@ with col8:
             st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
         else:
             mosaic_rgb  = aws_sentinel_chip(items)
+            st.write(mosaic_rgb)
 
-        st.write(mosaic_rgb)
+        
 
 
     
