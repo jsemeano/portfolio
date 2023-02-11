@@ -21,8 +21,7 @@ with prof_tab:
 
     
     # Define a custom CSS style for the expander header
-    st.set_config(
-        **{
+    st.set_config(**{
             "beta_expander": {
                 "header_expand_icon": '<svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 16l4-4 4 4z"/></svg>',
                 "header_collapse_icon": '<svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 8l-4 4-4-4z"/></svg>',
