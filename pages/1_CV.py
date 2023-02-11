@@ -19,21 +19,10 @@ st.header('My NLP Job Hunt Tool')
 
 prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Education', 'Skills', 'Certificates'])
 
-
-
 with prof_tab:
 
     with st.expander('Freelance - Data Engineer'):
-        st.markdown(
-                """
-            <style>
-            .streamlit-expanderHeader {
-                font-size: x-large;
-            }
-            </style>
-            """,
-                unsafe_allow_html=True,
-            )
+
         st.markdown(''':date: 12/2022 - Current''')
         st.markdown(''':round_pushpin: Berlin, Germany''')
         st.markdown('''
@@ -41,44 +30,88 @@ with prof_tab:
                     * Responsible for API building and data infrastructure''')
 
 
-    # #image_choice = st.radio('I want to see similar:', ('photo', 'sketch'), horizontal = True)
-    # image_choice = 'photo'
+
+    with st.expander('Le Wagon - Teaching Assistant'):
+
+        st.markdown(''':date: 01/2023 - Current''')
+        st.markdown(''':round_pushpin: Berlin, Germany''')
+        st.markdown('''
+                    * One on one work with students to improve their understanding of coding''')
 
 
-    # col1, col2 = st.columns(2)
+    with st.expander('European Central Bank - Research Analyst'):
 
-    # with col1:
-    #     uploaded_resume = st.file_uploader('Upload your resume')
-    #     if uploaded_resume != None:
-    #         resume_text = extract_content(uploaded_resume)
-
-    # with col2:
-    #     uploaded_cover = st.file_uploader('Upload your cover letter')
-    #     if uploaded_cover != None:
-    #         cover_text = extract_content(uploaded_cover)
-
-    # text = resume_text + cover_text
+        st.markdown(''':date: 02/2017 - 12/2021''')
+        st.markdown(''':round_pushpin: Frankfurt am Main, Germany''')
+        st.markdown('''
+                    * Improving the ETL pipeline for the ECB economic forecast including automation and quality assessment procedures
+                    * Providing input to ad-hoc briefings to the governing council
+                    * Developing of internal dashboards to clearly present the developments in the public finances of EU member states
+                    * Applying diverse time-series methods in debt and wage forecasting
+                    ''')
 
 
+    with st.expander('Católica-Lisbon SBE - Faculty Assistant'):
 
-    # job_description = st.text_area('Enter job description')
+        st.markdown(''':date: 09/2016 - 02/2017''')
+        st.markdown(''':round_pushpin: Lisbon, Portugal''')
+        st.markdown('''
+                    * Lecturing undergraduates on the basic tools used for data analysis
+                    ''')
 
-    # if (job_description != '') & ((resume_text != '') | (cover_text != '')) & (token is not None):
+    with st.expander('TechnipFMC - Engineer'):
 
-    #     openai.api_key = token
+        st.markdown(''':date: 08/2013 - 08/2015''')
+        st.markdown(''':round_pushpin: Kongsberg, Norway''')
+        st.markdown('''
+                    * Coordinating the designer team for a complete engineering project
+                    * Deploying root cause analysis methods
+                    ''')
 
-    #     if st.button('What am I missing?'):
 
-    #         summary = gpt_job(job_description)['choices'][0]['text']
-    #         time.sleep(30)
-    #         missing, summary = super_gpt(summary = summary, resume = resume_text, cover = cover_text)
+    with st.expander('Sonae SR - Business Analyst'):
+
+        st.markdown(''':date: 05/2012 - 05/2013''')
+        st.markdown(''':round_pushpin: Lisbon, Portugal''')
+        st.markdown('''
+                    * Developing of a predictive alarm system for delays of big deliveries
+                    * Tracking of KPI’s
+                    * Methodical analysis of sales to understand market dynamics
+                    ''')
+
+
+
 
 with edu_tab:
 
-    st.markdown('''
-                education
-                '''
-                )
+    with st.expander('Le Wagon - Data Science Bootcamp'):
+
+        st.markdown(''':date: 10/2022 - 12/2022''')
+        st.markdown(''':round_pushpin: Berlin, Germany''')
+        st.markdown('''
+                    * ETL machine learning bootcamp
+                    * Final project: Image search through sketch (Convolutional Neural Network with custom triplet loss function to suggest pictures similar to a user’s sketch)''')
+
+
+    with st.expander('Católica-Lisbon SBE - MSc in Economics'):
+
+        st.markdown(''':date: 04/2015 - 07/2017''')
+        st.markdown(''':round_pushpin: Lisbon, Portugal''')
+        st.markdown('''
+                    * Economic and statistical modelling
+                    ''')
+        
+    
+    with st.expander('IST, University of Lisbon - MSc in Mechanical Engineering'):
+
+        st.markdown(''':date: 09/2006 - 09/2012''')
+        st.markdown(''':round_pushpin: Lisbon, Portugal''')
+        st.markdown('''
+                    * Intelligent systems and optimization
+                    ''')
+        
+        
+        
 
 with skill_tab:
     st.header('These are my future plans:')
