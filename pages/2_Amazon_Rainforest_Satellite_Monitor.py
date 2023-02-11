@@ -1,5 +1,6 @@
 
 import streamlit as st
+import pandas as pd
 
 st.set_page_config(
     page_title='Amazon_alert',
@@ -9,14 +10,19 @@ st.set_page_config(
     menu_items=None)
 
 
-long = st.slider('Longitude - X', -72.0, -74.0, -73.0)
 
 
 lat = st.slider('Latitude - Y',  -9.0, -7.0, -8.0)
 
-st.write(f"You picked a point at Longitude {long} and Latitude {lat}")
+
+long = st.slider('Longitude - X', -74.0, -72.0, -73.0)
+
+st.write(f"You picked a point at Latitude {lat} and Longitude {long}.")
 
 
+lat_long_df = pd.DataFrame(ata = [lat,long], columns =['lat','long'])
 
+
+st.map(lat_long_df)
 
 
