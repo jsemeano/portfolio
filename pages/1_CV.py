@@ -20,6 +20,21 @@ with prof_tab:
     
 
     
+    # Define a custom CSS style for the expander header
+    st.set_config(**{
+            "expander": {
+                "header_expand_icon": '<svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 16l4-4 4 4z"/></svg>',
+                "header_collapse_icon": '<svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 8l-4 4-4-4z"/></svg>',
+                "header_font_size": "24px",
+                "header_font_weight": "bold",
+                "header_color": "blue",
+                "border_radius": "10px",
+                "background_color": "#f0f0f0",
+                "padding": "10px",
+            }
+        }
+    )
+
     with st.expander('Freelance - Data Engineer'):
 
         st.markdown(''':date: 12/2022 - Current''')
