@@ -137,9 +137,9 @@ def aws_sentinel_chip(items):
 
     start_mos = time.time()
 
-    mosaic_red = rioxarray.open_rasterio(items[0].assets["B04"].href)
-    mosaic_green = rioxarray.open_rasterio(items[0].assets["B03"].href)
-    mosaic_blue = rioxarray.open_rasterio(items[0].assets["B02"].href)
+    mosaic_red = rioxarray.open_rasterio(items[0].assets["B04"].href).values
+    mosaic_green = rioxarray.open_rasterio(items[0].assets["B03"].href).values
+    mosaic_blue = rioxarray.open_rasterio(items[0].assets["B02"].href).values
     
     
     # rasterio.open(items[0].assets['B04'].href) #for item in items]
@@ -230,7 +230,7 @@ with col8:
             
             
 if show_mosaic == 1:
-    st.write(mosaic_rgb.values)
+    st.write(mosaic_rgb)
 
         
 
