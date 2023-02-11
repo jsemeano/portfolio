@@ -28,16 +28,16 @@ import rasterio
 
 def scale_values(values):
     # Get the minimum and maximum values
-    max_value_allowed = 5000
+    # max_value_allowed = 5000
     min_value = np.min(values)
-    # max_value = np.max(values)
-    # # Calculate the range of the values
-    # value_range = max_value_allowed - min_value
-    # # Scale the values to a range of 0 to 1
-    # scaled_values = np.array([255*((value - min_value) / value_range) for value in values]).astype(int)
-    # scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
+    max_value = np.max(values)
+    # Calculate the range of the values
+    value_range = max_value - min_value
+    # Scale the values to a range of 0 to 1
+    scaled_values = np.array([255*((value - min_value) / value_range) for value in values]).astype(int)
+    scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
     
-    return min_value # scaled_values
+    return scaled_values
 
 
 def chipping(mosaic,dist,overlap):
