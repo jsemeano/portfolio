@@ -41,48 +41,63 @@ def scale_values(values):
     return  scaled_values
 
 
-def chipping_grid_px(mosaic, dist, overlap):
+def chipping(mosaic,dist,overlap):
     
-    """
-    Creates the grid for the chips
-    Inputs: - initial longitude (top left)
-            - initial latitude (top left)
-            - distance (in pixel size) each pixel is then turned into 0.0001 degrees
-            
-    Outputs:- final longitude (bottom right)
-            - final latitude (bottom right)
-    """
-    
-    start_lon = outer_area[0]
-    start_lat = outer_area[1]
-    end_lon = outer_area[2]
-    end_lat = outer_area[3]
-    
-    # calculate the step in degrees for the top left corners
-    lon_step =  int((1-overlap)*dist)
-    lat_step = int((1-overlap)*dist)
-
-    # calculate the step in degrees for the top left corners
-    lon_side =  dist*0.0001
-    lat_side = dist*0.0001
+    # calculate the distance of top left corners
+    x_step = int((1-overlap)*dist)
+    y_step = int((1-overlap)*dist)
     
     # calculate longitudes of top left corner    
-    vec_lon = start_lon + lon_step*np.arange(0,(end_lon-start_lon)//lon_step,1)
+    vec_x = x_step*np.arange(0,int(mosaic.shape[0]//x_step),1)
     
     # calculate latitudes of top left corner
-    vec_lat = start_lat - lat_step*np.arange(0,-(end_lat-start_lat)//lat_step,1)
+    vec_y = y_step*np.arange(0,int(mosaic.shape[1]//y_step),1)    
     
     # generate matrix of top left corners llongitude and latitude
-    top_left_M = np.array(np.meshgrid(vec_lon,vec_lat)).T.reshape(len(vec_lon)*len(vec_lat),2)
+    top_left_M = np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2)
     
     print(f'List contains {len(top_left_M)} chips')
     
-    
     # create the data frame with longitude and latitude of both corners of the chip
-    chip_df = pd.DataFrame(data=top_left_M, columns=['lon_top_left', 'lat_top_left'])
+    chip_df = pd.DataFrame(data=top_left_M, columns=['x_top_left', 'y_top_left'])
     
-    chip_df['lon_bottom_right'] = chip_df.apply(lambda x: x['lon_top_left']+lon_side , axis=1)
-    chip_df['lat_bottom_right'] = chip_df.apply(lambda x: x['lat_top_left']-lat_side , axis=1)
+    chip_df['x_bottom_right'] = chip_df.apply(lambda x: x['x_top_left']+dist , axis=1)
+    chip_df['y_bottom_right'] = chip_df.apply(lambda x: x['y_top_left']+dist , axis=1)
+    
+    chip_df['rgb'] = chip_df.apply(lambda x: mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
+    
+
+    chip_df['thumbnail'] = chip_df.apply(lambda x: f"{ x['x_top_left'] }_{ x['y_top_left'] }.jpg", axis=1)
+    
+    def create_thumbnail(img_array,name,dist):
+        # Create an Image object from the numpy array
+#         img =  PIL.Image.fromarray(img_array)
+
+
+#         with PIL.Image.open(name).convert('RGB') as img:
+
+#             image_array = np.array(img).astype(np.uint8)
+#             augmented_array = augmenter.augment_image(image_array)
+            
+        img_jpg = PIL.Image.fromarray(img_array, mode = 'RGB')
+        plt.imshow(img_jpg)
+        img_jpg.save(f"pics/{name}")
+
+#         img = PIL.Image.frombytes("RGB", (img_array.shape[0], img_array.shape[1]), img_array.tobytes())
+
+        
+#         # Resize the image to create a thumbnail
+#         img.thumbnail((dist, dist), PIL.Image.ANTIALIAS)
+
+
+#         # Save the thumbnail
+#         img.save(name)
+    
+    for  ind, chip in chip_df.iterrows():
+#         print(chip)
+#         print(ind)
+        create_thumbnail(chip['rgb'],chip['thumbnail'],dist)
+    
     
     return chip_df
 
@@ -157,9 +172,9 @@ def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
     
     print(f'{time.time() - start} seconds to prepare chips.' )
     
-    chipping_grid_px(mosaic_rgb, 256, 0.3)
+    chip_df = chipping(mosaic_rgb, 256, 0.3)
 
-    return mosaic_rgb
+    return chip_df
 
 
 
