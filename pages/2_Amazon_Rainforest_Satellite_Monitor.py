@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
-from amazon_functions.gee  import authentication
+from amazon_functions.gee import authentication
 
 
 st.set_page_config(
