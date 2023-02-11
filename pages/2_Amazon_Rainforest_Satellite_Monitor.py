@@ -84,9 +84,8 @@ def chipping(mosaic,dist,overlap):
 
 
 
-def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
+def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
     
-    start = time.time()
 
     ## source
 
@@ -123,8 +122,14 @@ def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
     # create dataframe with main metadata and thumbnails
 
     items = search.get_all_items()
+    
+    return items
 
         
+
+
+def aws_sentinel_chip(items):
+
     # Merge each colour band independently and group them into a RGB array
 
     start_mos = time.time()
@@ -146,13 +151,11 @@ def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
     
     mosaic_rgb = [mosaic_red, mosaic_green, mosaic_blue]
     
-    print(f'{time.time() - start} seconds to prepare chips.' )
+    print(f'{time.time() - start_mos} seconds to prepare chips.' )
     
     chip_df = chipping(mosaic_rgb, 256, 0.3)
 
     return chip_df
-
-
 
 st.set_page_config(
     page_title='Amazon_alert',
@@ -208,7 +211,7 @@ col7, col8, col9 = st.columns(3)
 with col8:
     st.map(lat_long_df)
     if st.button('Get mosaic df'):
-        mosaic_df =  aws_sentinel(max_items, cloud_cover,start_date,end_date,[lat,lon])
+        mosaic_df =  aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,[lat,lon])
         st.write(mosaic_df)
 
 
