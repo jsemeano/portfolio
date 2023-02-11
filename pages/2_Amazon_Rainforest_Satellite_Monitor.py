@@ -120,7 +120,10 @@ def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
 
 
     # create dataframe with main metadata and thumbnails
-
+    
+    if search.matched() < 1:
+        return 'failed'
+    
     items = search.get_all_items()
     
     return items
@@ -212,6 +215,10 @@ with col8:
     st.map(lat_long_df)
     if st.button('Get mosaic df'):
         mosaic_df =  aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,[lat,lon])
+        
+        if mosaic_df == 'failed':
+            st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover) ')
+
         st.write(mosaic_df)
 
 
