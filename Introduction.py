@@ -2,7 +2,7 @@ import streamlit as st
 import os
 
 st.set_page_config(
-    page_title='Erez Tepper Portfolio Site',
+    page_title='Joao Semeano Portfolio site',
     layout="wide",
     initial_sidebar_state="auto",
     menu_items=None)
