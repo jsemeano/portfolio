@@ -207,10 +207,12 @@ lat_long_df = pd.DataFrame(data={'lat' : [lat], 'lon': [lon]})
 col7, col8, col9 = st.columns(3)
 with col8:
     st.map(lat_long_df)
+    if st.button('Get mosaic df'):
+        mosaic_df =  aws_sentinel(max_items, cloud_cover,start_date,end_date,[lat,lon])
+        st.write(mosaic_df)
 
-if st.button('Get mosaic df'):
-    mosaic_df =  aws_sentinel(max_items, cloud_cover,start_date,end_date,[lat,lon])
+
     
     
-st.write(mosaic_df)
+
     
