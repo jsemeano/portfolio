@@ -214,12 +214,14 @@ col7, col8, col9 = st.columns(3)
 with col8:
     st.map(lat_long_df)
     if st.button('Get mosaic df'):
-        mosaic_df =  aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,[lat,lon])
+        items =  aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,[lat,lon])
         
-        if mosaic_df == 'failed':
-            st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover) ')
+        if items == 'failed':
+            st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
+        else:
+            mosaic_rgb  = aws_sentinel_chip(items)
 
-        st.write(mosaic_df)
+        st.write(mosaic_rgb)
 
 
     
