@@ -26,12 +26,12 @@ col3, col4 = st.columns(2)
 
 with col3:
     start_date = st.slider("When do you start?",
-                        value=datetime(2020, 1, 1),
+                        value=date(2020, 1, 1),
                         format="MM/DD/YY")
 
 with col4:
     end_date = st.slider("When do you stop?",
-                        value=datetime(2020, 1, 2),
+                        value=date(2020, 1, 2),
                         format="MM/DD/YY")
     
     
