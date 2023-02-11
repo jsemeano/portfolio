@@ -24,9 +24,9 @@ prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Ed
 with prof_tab:
 
     with st.expander('Freelance - Data Engineer'):
-        st.markdown(''' 12/2022 - Current
-                    :location: Berlin, Germany
-                    * Deforestation alert system : Leveraging of satellite imagery to give an NGO early warning of deforestation activities in the Amazon
+        st.markdown('''12/2022 - Current''')
+        st.markdown(''':location: Berlin, Germany''')
+        st.markdown('''* Deforestation alert system : Leveraging of satellite imagery to give an NGO early warning of deforestation activities in the Amazon
                     * Responsible for API building and data infrastructure''')
 
 
