@@ -18,7 +18,7 @@ prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Ed
 
 with prof_tab:
 
-    with st.expander('Freelance - Data Engineer'):
+    with st.beta_expander('Freelance - Data Engineer'):
 
         st.markdown(''':date: 12/2022 - Current''')
         st.markdown(''':round_pushpin: Berlin, Germany''')
