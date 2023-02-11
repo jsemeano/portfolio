@@ -17,10 +17,10 @@ col1, col2 = st.columns(2)
 # (max_items, cloud_cover,start_date,end_date,area)
 
 with col1:
-    cloud_cover = st.slider('Maximum cloud cover',  0, 100)
+    cloud_cover = st.slider('Maximum cloud cover (%)',  0, 100, 50)
 
 with col2:
-    max_items = st.slider('Maximum number of images',  5,100,5)
+    max_items = st.slider('Maximum number of images',  5,100,(5))
 
 col3, col4 = st.columns(2)
 
