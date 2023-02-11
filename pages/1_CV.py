@@ -25,13 +25,9 @@ with prof_tab:
         st.markdown('''
                     * Deforestation alert system : Leveraging of satellite imagery to give an NGO early warning of deforestation activities in the Amazon
                     * Responsible for API building and data infrastructure''')
-            # Apply CSS styling to the text
-        st.write(
-            "<style>.css-1aumxhk { font-style: italic; color: red; }</style>",
-            unsafe_allow_html=True,
-        )
-        st.write("Some styled text inside the expander")
-
+    # Apply CSS styling to the text
+        styled_text = '<span style="font-style: italic; color: red;">Some styled text inside the expander</span>'
+        st.write(styled_text, unsafe_allow_html=True)
 
 
     with st.expander('Le Wagon - Teaching Assistant'):
