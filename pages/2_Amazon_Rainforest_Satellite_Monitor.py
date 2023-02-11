@@ -153,17 +153,17 @@ def aws_sentinel_chip(items):
 
     # print(f'time to complete mosaics : {time.time()-start_mos} (s)')
         
-    mosaic_red = scale_values(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])))
-    mosaic_green = scale_values(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])))
-    mosaic_blue = scale_values(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])))
+    # mosaic_red = scale_values(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])))
+    # mosaic_green = scale_values(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])))
+    # mosaic_blue = scale_values(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])))
     
-    mosaic_rgb = [mosaic_red, mosaic_green, mosaic_blue]
+    # mosaic_rgb = [mosaic_red, mosaic_green, mosaic_blue]
     
     # print(f'{time.time() - start_mos} seconds to prepare chips.' )
     
     # chip_df = chipping(mosaic_rgb, 256, 0.3)
 
-    return mosaic_rgb #chip_df
+    return mosaic_red #mosaic_rgb #chip_df
 
 st.set_page_config(
     page_title='Amazon_alert',
