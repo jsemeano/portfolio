@@ -25,9 +25,7 @@ with prof_tab:
 
     with st.expander('Freelance - Data Engineer'):
         st.markdown(''' 12/2022 - Current
-                    
                     :location: Berlin, Germany
-                    
                     * Deforestation alert system : Leveraging of satellite imagery to give an NGO early warning of deforestation activities in the Amazon
                     * Responsible for API building and data infrastructure''')
 
