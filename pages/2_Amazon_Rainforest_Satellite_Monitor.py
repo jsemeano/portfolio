@@ -214,6 +214,7 @@ st.markdown(html_str, unsafe_allow_html=True)
 lat_long_df = pd.DataFrame(data={'lat' : [lat], 'lon': [lon]})
 
 col7, col8, col9 = st.columns(3)
+show_mosaic = 0
 with col8:
     st.map(lat_long_df)
     if st.button('Get mosaic df'):
@@ -223,7 +224,11 @@ with col8:
             st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
         else:
             mosaic_rgb  = aws_sentinel_chip(items)
-            st.write(mosaic_rgb)
+            show_mosaic = 1
+            
+            
+if show_mosaic == 1:
+    st.write(mosaic_rgb.values)
 
         
 
