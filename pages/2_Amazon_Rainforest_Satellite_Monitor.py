@@ -160,9 +160,9 @@ def aws_sentinel_chip(items):
     
     
     
-    
+    mosaic_red_r = mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2]))
    
-    mosaic_red = scale_values(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])))
+    mosaic_red = scale_values(mosaic_red_r)
     
     
     
