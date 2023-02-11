@@ -13,7 +13,7 @@ import PIL
 # import cv2
 # from google.cloud import storage
 import io
-import pystac
+# import pystac
 # import pystac_client
 from pystac_client import Client
 from shapely.geometry import Point#, Polygon
