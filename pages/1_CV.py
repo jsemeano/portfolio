@@ -23,12 +23,13 @@ prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Ed
 
 with prof_tab:
 
-    with st.expander('# Freelance - Data Engineer'):
-        st.markdown(""" 12/2022 - Current
+    with st.expander('Freelance - Data Engineer'):
+        st.markdown(''' 12/2022 - Current
+                    
                     :location: Berlin, Germany
                     
                     * Deforestation alert system : Leveraging of satellite imagery to give an NGO early warning of deforestation activities in the Amazon
-                    * Responsible for API building and data infrastructure""")
+                    * Responsible for API building and data infrastructure''')
 
 
     # #image_choice = st.radio('I want to see similar:', ('photo', 'sketch'), horizontal = True)
