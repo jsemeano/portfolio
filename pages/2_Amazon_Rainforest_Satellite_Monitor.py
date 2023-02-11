@@ -9,10 +9,11 @@ st.set_page_config(
     menu_items=None)
 
 
-long = st.slider('Longitude - X', 0, 130, 25)
+long = st.slider('Longitude - X', -72.0, -74.0, -73.0)
 
 
-lat = st.slider('Latitude - Y', 0, 130, (25.0, 75.0))
+lat = st.slider('Latitude - Y',  -9.0, -7.0, -8.0)
+
 st.write(f"You picked a point at Longitude {long} and Latitude {lat}")
 
 
