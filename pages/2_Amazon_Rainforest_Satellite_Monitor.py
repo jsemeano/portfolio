@@ -44,7 +44,8 @@ with col6:
 
 
 html_str = f"""
-<p class="a">You picked a point at Latitude {lat} and Longitude {lon}. Up to {max_items} images collected between {start_date} and {end_date} and with less than {cloud_cover}% of cloud cover will be considered."</p>
+<p class="a">You picked a point at Latitude {lat} and Longitude {lon}. 
+Up to {max_items} images collected between {start_date} and {end_date} and with less than {cloud_cover}% of cloud cover will be considered."</p>
 """
 
 st.markdown(html_str, unsafe_allow_html=True)
