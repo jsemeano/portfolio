@@ -37,7 +37,7 @@ def scale_values(values):
     scaled_values = np.array([255*((value - min_value) / value_range) for value in values]).astype(int)
     scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
     
-    return scaled_values
+    return min_value # scaled_values
 
 
 def chipping(mosaic,dist,overlap):
