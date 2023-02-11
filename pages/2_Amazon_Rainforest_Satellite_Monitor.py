@@ -2,7 +2,175 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
-from amazon_functions.gee import authentication
+# from amazon_functions.gee import authentication
+import numpy as np
+# import geemap
+# import tensorflow as tf
+# import tensorflow_hub as hub
+import matplotlib.pyplot as plt
+import time
+import PIL 
+# import cv2
+# from google.cloud import storage
+import io
+from pystac_client import Client
+from shapely.geometry import Point#, Polygon
+# from shapely.geometry import Point
+# import rioxarray
+# from rioxarray.merge import merge_arrays
+import rasterio
+
+
+
+def scale_values(values):
+    # Get the minimum and maximum values
+    max_value_allowed = 5000
+    min_value = np.min(values)
+    max_value = np.max(values)
+    # Calculate the range of the values
+    value_range = max_value_allowed - min_value
+    # Scale the values to a range of 0 to 1
+    scaled_values = np.array([255*((value - min_value) / value_range) for value in values]).astype(int)
+    scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
+    
+    return  scaled_values
+
+
+def chipping(mosaic,dist,overlap):
+    
+    # calculate the distance of top left corners
+    x_step = int((1-overlap)*dist)
+    y_step = int((1-overlap)*dist)
+    
+    # calculate longitudes of top left corner    
+    vec_x = x_step*np.arange(0,int(mosaic.shape[0]//x_step),1)
+    
+    # calculate latitudes of top left corner
+    vec_y = y_step*np.arange(0,int(mosaic.shape[1]//y_step),1)    
+    
+    # generate matrix of top left corners llongitude and latitude
+    top_left_M = np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2)
+    
+    print(f'List contains {len(top_left_M)} chips')
+    
+    # create the data frame with longitude and latitude of both corners of the chip
+    chip_df = pd.DataFrame(data=top_left_M, columns=['x_top_left', 'y_top_left'])
+    
+    chip_df['x_bottom_right'] = chip_df.apply(lambda x: x['x_top_left']+dist , axis=1)
+    chip_df['y_bottom_right'] = chip_df.apply(lambda x: x['y_top_left']+dist , axis=1)
+    
+    chip_df['rgb'] = chip_df.apply(lambda x: mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
+    
+
+    chip_df['thumbnail'] = chip_df.apply(lambda x: f"{ x['x_top_left'] }_{ x['y_top_left'] }.jpg", axis=1)
+    
+    def create_thumbnail(img_array,name,dist):
+        # Create an Image object from the numpy array
+#         img =  PIL.Image.fromarray(img_array)
+
+
+#         with PIL.Image.open(name).convert('RGB') as img:
+
+#             image_array = np.array(img).astype(np.uint8)
+#             augmented_array = augmenter.augment_image(image_array)
+            
+        img_jpg = PIL.Image.fromarray(img_array, mode = 'RGB')
+        plt.imshow(img_jpg)
+        img_jpg.save(f"pics/{name}")
+
+#         img = PIL.Image.frombytes("RGB", (img_array.shape[0], img_array.shape[1]), img_array.tobytes())
+
+        
+#         # Resize the image to create a thumbnail
+#         img.thumbnail((dist, dist), PIL.Image.ANTIALIAS)
+
+
+#         # Save the thumbnail
+#         img.save(name)
+    
+    for  ind, chip in chip_df.iterrows():
+#         print(chip)
+#         print(ind)
+        create_thumbnail(chip['rgb'],chip['thumbnail'],dist)
+    
+    
+    return chip_df
+
+
+
+
+
+# try:
+#     ee.Initialize()
+# except Exception as e:
+def aws_sentinel(max_items, cloud_cover,start_date,end_date,area):
+    
+    start = time.time()
+
+    ## source
+
+    api_url = "https://earth-search.aws.element84.com/v0"
+    client = Client.open(api_url)
+    
+    # define area of interest
+
+    # areas_list = [[-73.434884,-8.811260,-72.683737,-9.205097]]
+
+    # 3578.46 sqkm close to the point William mentioned (I think)
+
+    # area = areas_list[0]
+    # coords =((area[0],area[1]),(area[0],area[3]),(area[2],area[3]),(area[2],area[1]), (area[0],area[1]))
+    # point = Polygon(coords)
+
+    point = Point(area[0],area[1])
+    # download images from S2 AWS bucket
+
+    collection = "sentinel-s2-l2a-cogs"  # Sentinel-2, Level 2A, COGs
+
+    search = client.search(
+        collections=[collection],
+        intersects=point,
+        max_items=max_items,
+        datetime=f"{start_date}/{end_date}",
+        query=[f"eo:cloud_cover<{cloud_cover}"]
+        # resolution  =10
+    )
+
+    print(search.matched())
+
+
+    # create dataframe with main metadata and thumbnails
+
+    items = search.get_all_items()
+
+        
+    # Merge each colour band independently and group them into a RGB array
+
+    start_mos = time.time()
+
+    mosaic_red = rasterio.open(items[0].assets['B04'].href) #for item in items]
+    # mosaic_red, out_trans_red = merge(item_B04)
+
+    mosaic_green = rasterio.open(items[0].assets['B03'].href) #for item in items]
+    # mosaic_green, out_trans_green = merge(item_B03)
+
+    mosaic_blue = rasterio.open(items[0].assets['B02'].href) #for item in items]
+    # mosaic_blue, out_trans_blue = merge(item_B02)
+
+    print(f'time to complete mosaics : {time.time()-start_mos} (s)')
+        
+    mosaic_red = scale_values(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])))
+    mosaic_green = scale_values(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])))
+    mosaic_blue = scale_values(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])))
+    
+    mosaic_rgb = [mosaic_red, mosaic_green, mosaic_blue]
+    
+    print(f'{time.time() - start} seconds to prepare chips.' )
+    
+    chip_df = chipping(mosaic_rgb, 256, 0.3)
+
+    return chip_df
+
 
 
 st.set_page_config(
@@ -60,4 +228,8 @@ with col8:
     st.map(lat_long_df)
 
 if st.button('Get mosaic df'):
-    mosaic_df =  authentication.aws_sentinel(max_items, cloud_cover,start_date,end_date,[lat,lon])
+    mosaic_df =  aws_sentinel(max_items, cloud_cover,start_date,end_date,[lat,lon])
+    
+    
+st.write(mosaic_df)
+    
