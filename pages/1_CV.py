@@ -17,8 +17,11 @@ st.markdown('''
 prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Education', 'Skills', 'Certificates'])
 
 with prof_tab:
+    
+    styled_text = '<span style="font-style: italic; color: red;">Freelance - Data Engineer</span>'
+    # st.write(styled_text, unsafe_allow_html=True)
 
-    with st.beta_expander('Freelance - Data Engineer'):
+    with st.beta_expander(styled_text, unsafe_allow_html=True):
 
         st.markdown(''':date: 12/2022 - Current''')
         st.markdown(''':round_pushpin: Berlin, Germany''')
@@ -26,8 +29,7 @@ with prof_tab:
                     * Deforestation alert system : Leveraging of satellite imagery to give an NGO early warning of deforestation activities in the Amazon
                     * Responsible for API building and data infrastructure''')
     # Apply CSS styling to the text
-        styled_text = '<span style="font-style: italic; color: red;">Some styled text inside the expander</span>'
-        st.write(styled_text, unsafe_allow_html=True)
+        
 
 
     with st.expander('Le Wagon - Teaching Assistant'):
