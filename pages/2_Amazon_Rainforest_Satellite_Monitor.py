@@ -20,7 +20,7 @@ from shapely import geometry
 
 #import Point#, Polygon
 # from shapely.geometry import Point
-# import rioxarray
+import rioxarray
 # from rioxarray.merge import merge_arrays
 import rasterio
 
@@ -137,7 +137,10 @@ def aws_sentinel_chip(items):
 
     start_mos = time.time()
 
-    mosaic_red = rasterio.open(items[0].assets['B04'].href) #for item in items]
+    mosaic_red = rioxarray.open_rasterio(items[0].assets["B04"].href)
+    
+    
+    # rasterio.open(items[0].assets['B04'].href) #for item in items]
     # mosaic_red, out_trans_red = merge(item_B04)
 
     # mosaic_green = rasterio.open(items[0].assets['B03'].href) #for item in items]
