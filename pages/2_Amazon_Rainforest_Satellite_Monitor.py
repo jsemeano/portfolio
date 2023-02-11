@@ -140,25 +140,25 @@ def aws_sentinel_chip(items):
     mosaic_red = rasterio.open(items[0].assets['B04'].href) #for item in items]
     # mosaic_red, out_trans_red = merge(item_B04)
 
-    mosaic_green = rasterio.open(items[0].assets['B03'].href) #for item in items]
-    # mosaic_green, out_trans_green = merge(item_B03)
+    # mosaic_green = rasterio.open(items[0].assets['B03'].href) #for item in items]
+    # # mosaic_green, out_trans_green = merge(item_B03)
 
-    mosaic_blue = rasterio.open(items[0].assets['B02'].href) #for item in items]
-    # mosaic_blue, out_trans_blue = merge(item_B02)
+    # mosaic_blue = rasterio.open(items[0].assets['B02'].href) #for item in items]
+    # # mosaic_blue, out_trans_blue = merge(item_B02)
 
-    print(f'time to complete mosaics : {time.time()-start_mos} (s)')
+    # print(f'time to complete mosaics : {time.time()-start_mos} (s)')
         
-    mosaic_red = scale_values(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])))
-    mosaic_green = scale_values(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])))
-    mosaic_blue = scale_values(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])))
+    # mosaic_red = scale_values(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])))
+    # mosaic_green = scale_values(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])))
+    # mosaic_blue = scale_values(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])))
     
-    mosaic_rgb = [mosaic_red, mosaic_green, mosaic_blue]
+    # mosaic_rgb = [mosaic_red, mosaic_green, mosaic_blue]
     
-    print(f'{time.time() - start_mos} seconds to prepare chips.' )
+    # print(f'{time.time() - start_mos} seconds to prepare chips.' )
     
-    chip_df = chipping(mosaic_rgb, 256, 0.3)
+    # chip_df = chipping(mosaic_rgb, 256, 0.3)
 
-    return chip_df
+    return mosaic_red #chip_df
 
 st.set_page_config(
     page_title='Amazon_alert',
@@ -174,7 +174,7 @@ col1, col2 = st.columns(2)
 # (max_items, cloud_cover,start_date,end_date,area)
 
 with col1:
-    cloud_cover = st.slider('Maximum cloud cover (%)',  0, 100, 50)
+    cloud_cover = st.slider('Maximum cloud cover (%)',  50, 100, 75)
 
 with col2:
     max_items = st.slider('Maximum number of images',  5,100,(5))
