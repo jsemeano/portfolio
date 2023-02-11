@@ -34,13 +34,14 @@ def scale_values(values):
     # Calculate the range of the values
     value_range = max_value - min_value
     # Scale the values to a range of 0 to 1
-    # scaled_values = np.rint(255*((values - min_value) / value_range))
+    scaled_values = 255*((values - min_value) / value_range)
+    scaled_values_int = np.rint(scaled_values)
     
     
     # scaled_values = np.array([255*((value - min_value) / value_range) for value in values])#.astype(int)
     # scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
     
-    return value_range #(min_value, max_value, value_range) # scaled_values
+    return scaled_values_int #(min_value, max_value, value_range) # scaled_values
 
 
 def chipping(mosaic,dist,overlap):
