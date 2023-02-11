@@ -20,7 +20,7 @@ long = st.slider('Longitude - X', -74.0, -72.0, -73.0)
 st.write(f"You picked a point at Latitude {lat} and Longitude {long}.")
 
 
-lat_long_df = pd.DataFrame(ata = [lat,long], columns =['lat','long'])
+lat_long_df = pd.DataFrame(data = [lat,long], columns =['lat','long'])
 
 
 st.map(lat_long_df)
