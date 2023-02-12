@@ -16,24 +16,37 @@ st.set_page_config(
     menu_items=None)
 
 
-def scale_values(values):
-    # # Get the minimum and maximum values
-    # # max_value_allowed = 5000
-    # min_value = np.min(values)
-    # max_value = np.max(values)
-    # # Calculate the range of the values
-    # value_range = max_value - min_value
-    if np.max(values)-np.min(values) == 0:
-        print(np.max(values)-np.min(values))
-        return None
+# def scale_values(values):
+#     # # Get the minimum and maximum values
+#     max_value_allowed = 5000
+#     # min_value = np.min(values)
+#     # max_value = np.max(values)
+#     # # Calculate the range of the values
+#     # value_range = max_value - min_value
+#     if max_value_allowed-np.min(values) == 0:
+#         print(np.max(values)-np.min(values))
+#         return None
     
+#     # Scale the values to a range of 0 to 1
+#     scaled_values = np.rint(255*((values - np.min(values)) / (np.max(values)-np.min(values))))
+#     scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
+    
+#     return  scaled_values 
+#     # return  (min_value, max_value, value_range) # scaled_values_int 
+
+
+def scale_values(values):
+    # Get the minimum and maximum values
+    max_value_allowed = 5000
+    min_value = np.min(values)
+    max_value = np.max(values)
+    # Calculate the range of the values
+    value_range = max_value_allowed - min_value
     # Scale the values to a range of 0 to 1
-    scaled_values = np.rint(255*((values - np.min(values)) / (np.max(values)-np.min(values))))
+    scaled_values = np.array([255*((value - min_value) / value_range) for value in values]).astype(int)
     scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
     
-    return  scaled_values 
-    # return  (min_value, max_value, value_range) # scaled_values_int 
-
+    return  scaled_values
 
 def chipping(mosaic,dist,overlap):
        
@@ -134,11 +147,11 @@ def aws_sentinel_chip(item):
     
     mosaic_rgb = mosaic_rgb.iloc[2000]['rgb']
     
-    print(mosaic_rgb)
+    # print(mosaic_rgb)
     
-    for i in range(2):
-        print(i)
-        mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
+    # for i in range(2):
+    #     print(i)
+    #     mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
     
     
         
