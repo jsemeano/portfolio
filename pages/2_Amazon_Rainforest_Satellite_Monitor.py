@@ -93,98 +93,42 @@ def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
     return item
 
 def aws_sentinel_chip(item):
+    
+    mosaic_rgb = item.geometry['coordinates']
 
     # Merge each colour band independently and group them into a RGB array
 
-    mosaic_red = rioxarray.open_rasterio(item.assets["B04"].href).values
-    mosaic_green = rioxarray.open_rasterio(item.assets["B03"].href).values
-    mosaic_blue = rioxarray.open_rasterio(item.assets["B02"].href).values
-    
-    
-    # rasterio.open(items[0].assets['B04'].href) #for item in items]
-    # mosaic_red, out_trans_red = merge(item_B04)
+    # mosaic_red = rioxarray.open_rasterio(item.assets["B04"].href).values
+    # mosaic_green = rioxarray.open_rasterio(item.assets["B03"].href).values
+    # mosaic_blue = rioxarray.open_rasterio(item.assets["B02"].href).values  
 
-    # mosaic_green = rasterio.open(items[0].assets['B03'].href) #for item in items]
-    # # mosaic_green, out_trans_green = merge(item_B03)
-
-    # mosaic_blue = rasterio.open(items[0].assets['B02'].href) #for item in items]
-    # # mosaic_blue, out_trans_blue = merge(item_B02)
-
-    # print(f'time to complete mosaics : {time.time()-start_mos} (s)')
-     
-    # mosaic_red = mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2]))
+    # mosaic_rgb = np.stack([mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])), 
+    #                        mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])), 
+    #                        mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
+    #                       axis=2)
     
+    # print(f'red : max - {np.max(mosaic_red)} , min - {np.min(mosaic_red)} ')
+    # print(f'green : max - {np.max(mosaic_green)} , min - {np.min(mosaic_green)} ')
+    # print(f'blue : max - {np.max(mosaic_blue)} , min - {np.min(mosaic_blue)} ')
     
-    
-    # mosaic_red = mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2]))
-    # mosaic_green = mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2]))
-    # mosaic_blue = mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))
+    # del mosaic_blue
+    # del mosaic_green
+    # del mosaic_red
    
-    # mosaic_rgb = np.stack([mosaic_red, mosaic_green, mosaic_blue], axis=2)    
-    
-    
+    # mosaic_rgb = chipping(mosaic_rgb,256,0.3)
 
-    mosaic_rgb = np.stack([mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])), 
-                           mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])), 
-                           mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
-                          axis=2)
+    # mosaic_rgb = mosaic_rgb.iloc[2000]['rgb']
     
-    print(f'red : max - {np.max(mosaic_red)} , min - {np.min(mosaic_red)} ')
-    print(f'green : max - {np.max(mosaic_green)} , min - {np.min(mosaic_green)} ')
-    print(f'blue : max - {np.max(mosaic_blue)} , min - {np.min(mosaic_blue)} ')
+    # # print(mosaic_rgb)
     
-    del mosaic_blue
-    del mosaic_green
-    del mosaic_red
-   
-    mosaic_rgb = chipping(mosaic_rgb,256,0.3)
+    # for i in range(3):
+    #     print(i)
+    #     mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
     
-    # mosaic_rgb = mosaic_rgb[0:3]
-    
-    
-    # mosaic_rgb['rgb'] = mosaic_rgb.iloc[0].apply(lambda x: [scale_values(x['rgb'][:,:,0]),scale_values(x['rgb'][:,:,1]),scale_values(x['rgb'][:,:,2])], axis=1)
-    
-    
-    mosaic_rgb = mosaic_rgb.iloc[2000]['rgb']
-    
-    # print(mosaic_rgb)
-    
-    for i in range(3):
-        print(i)
-        mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
-    
-    
-        
-    # scaled_rgb = []
-    # for index, row in mosaic_rgb.iterrows():
-    #     scaled_rgb.append([scale_values(row['rgb'][:,:,0]),scale_values(row['rgb'][:,:,1]),scale_values(row['rgb'][:,:,2])])
-    
-    # print(mosaic_rgb[0])
-   
-    # mosaic_red = scale_values(mosaic_red_r)
-    
-    
-    
-    # mosaic_green = scale_values(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])))
-    # mosaic_blue = scale_values(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])))
-    
-    # mosaic_rgb = [mosaic_red, mosaic_green, mosaic_blue]
-    
-    # print(f'{time.time() - start_mos} seconds to prepare chips.' )
-    
-    # chip_df = chipping(mosaic_rgb, 256, 0.3)
-
-    return mosaic_rgb #mosaic_rgb #chip_df
+    return mosaic_rgb 
 
 
-
-# col1, col2 = st.columns(2)
-
-# with col1:
-#     cloud_cover = st.slider('Maximum cloud cover (%)',  50, 100, 75)
-
-# with col2:
-#     max_items = st.slider('Maximum number of images',  5,100,(5))
+############### Streamlit page ####################
 
 col3, col4 = st.columns(2)
 
@@ -214,31 +158,25 @@ Images collected between {start_date} and {end_date}.</p>
 
 st.markdown(html_str, unsafe_allow_html=True)
 
-
 lat_long_df = pd.DataFrame(data={'lat' : [lat], 'lon': [lon]})
 
 col7, col8, col9 = st.columns(3)
-show_mosaic = 0
+
 with col8:
     st.map(lat_long_df)
     if st.button('Get chip'):
         items =  aws_sentinel_retrieve_item(15, 70,start_date,end_date,[lon,lat])
         
         if items == 'failed':
-            st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
+            show_mosaic = 0
+            
         else:
             print(items)
             mosaic_rgb  = aws_sentinel_chip(items)
             show_mosaic = 1
-            
-            
+
     if show_mosaic == 1:
-        st.image(mosaic_rgb, clamp=True, channels='RGB')
-
-        
-
-
-    
-    
-
-    
+        st.write(mosaic_rgb)
+    else:
+        st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
+        # st.image(mosaic_rgb, clamp=True, channels='RGB')
