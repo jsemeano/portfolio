@@ -116,6 +116,10 @@ def aws_sentinel_chip(item):
                            mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
                           axis=2)
     
+    print(f'red : max - {np.max(mosaic_red)} , min - {np.min(mosaic_red)} ')
+    print(f'green : max - {np.max(mosaic_green)} , min - {np.min(mosaic_green)} ')
+    print(f'blue : max - {np.max(mosaic_blue)} , min - {np.min(mosaic_blue)} ')
+    
     del mosaic_blue
     del mosaic_green
     del mosaic_red
