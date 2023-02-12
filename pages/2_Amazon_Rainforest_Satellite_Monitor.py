@@ -169,7 +169,7 @@ def aws_sentinel_chip(items):
     mosaic_green_r = mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2]))
     mosaic_blue_r = mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))
    
-   
+    mosaic_rgb = np.stack([mosaic_red_r, mosaic_green_r, mosaic_blue_r], axis=2)
    
    
    
@@ -186,7 +186,7 @@ def aws_sentinel_chip(items):
     
     # chip_df = chipping(mosaic_rgb, 256, 0.3)
 
-    return mosaic_red_r #mosaic_rgb #chip_df
+    return mosaic_rgb #mosaic_rgb #chip_df
 
 
 
