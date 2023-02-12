@@ -129,9 +129,9 @@ def aws_sentinel_chip(item):
     
     mosaic_rgb = mosaic_rgb.iloc[2000]['rgb']
     
-    # for i in range(2):
-    #     print(i)
-    #     mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
+    for i in range(2):
+        print(i)
+        mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
     
     
         
