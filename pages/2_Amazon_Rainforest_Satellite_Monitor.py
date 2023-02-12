@@ -69,7 +69,9 @@ def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
     if search.matched() < 1:
         return 'failed'
     
-    item = search.get_all_items()[pd.DataFrame(data = {'cloud_cover' : [item.properties['eo:cloud_cover'] for item in items]}).sort_values(by='cloud_cover').index[0]]
+    items = search.get_all_items()
+    
+    item = items[pd.DataFrame(data = {'cloud_cover' : [item.properties['eo:cloud_cover'] for item in items]}).sort_values(by='cloud_cover').index[0]]
 
     return item
 
