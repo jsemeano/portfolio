@@ -40,6 +40,8 @@ def scale_values(values):
     max_value = np.max(values)
     # Calculate the range of the values
     value_range = max_value - min_value
+    print(value_range)
+    
     # Scale the values to a range of 0 to 1
     scaled_values = 255*((values - min_value) / value_range)
     scaled_values_int = np.rint(scaled_values)
