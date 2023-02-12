@@ -140,13 +140,13 @@ def aws_sentinel_chip(item):
 
 
 
-col1, col2 = st.columns(2)
+# col1, col2 = st.columns(2)
 
-with col1:
-    cloud_cover = st.slider('Maximum cloud cover (%)',  50, 100, 75)
+# with col1:
+#     cloud_cover = st.slider('Maximum cloud cover (%)',  50, 100, 75)
 
-with col2:
-    max_items = st.slider('Maximum number of images',  5,100,(5))
+# with col2:
+#     max_items = st.slider('Maximum number of images',  5,100,(5))
 
 col3, col4 = st.columns(2)
 
@@ -184,7 +184,7 @@ show_mosaic = 0
 with col8:
     st.map(lat_long_df)
     if st.button('Get mosaic df'):
-        items =  aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,[lon,lat])
+        items =  aws_sentinel_retrieve_item(15, 70,start_date,end_date,[lon,lat])
         
         if items == 'failed':
             st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
