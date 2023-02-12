@@ -178,7 +178,7 @@ with col8:
             show_mosaic = 1
 
     if show_mosaic == 1:
-        st.write(mosaic_rgb)
+        st.write(mosaic_rgb['x_top_left'])
         # st.image(mosaic_rgb, clamp=True, channels='RGB')
     elif show_mosaic == 0:
         st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
