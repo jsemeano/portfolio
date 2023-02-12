@@ -162,6 +162,8 @@ lat_long_df = pd.DataFrame(data={'lat' : [lat], 'lon': [lon]})
 
 col7, col8, col9 = st.columns(3)
 
+show_mosaic = 100
+
 with col8:
     st.map(lat_long_df)
     if st.button('Get chip'):
@@ -177,6 +179,6 @@ with col8:
 
     if show_mosaic == 1:
         st.write(mosaic_rgb)
-    else:
+    elif show_mosaic == 0:
         st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
         # st.image(mosaic_rgb, clamp=True, channels='RGB')
