@@ -135,7 +135,7 @@ def aws_sentinel_chip(item,area):
     #     print(i)
     #     mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
     
-    return ind_item# mosaic_rgb 
+    return     max_lon ,    min_lon ,    max_lat ,    min_lat , ind_item# mosaic_rgb 
 
 
 ############### Streamlit page ####################
