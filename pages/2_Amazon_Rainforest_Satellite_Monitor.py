@@ -127,7 +127,7 @@ def aws_sentinel_chip(item,area):
    
     mosaic_rgb = chipping(mosaic_rgb,256,0.3)
 
-    mosaic_rgb = mosaic_rgb.iloc[ind_item]['rgb']
+    mosaic_rgb = mosaic_rgb.iloc[int(ind_item)]['rgb']
     
     # print(mosaic_rgb)
     
