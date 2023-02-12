@@ -221,7 +221,7 @@ col7, col8, col9 = st.columns(3)
 show_mosaic = 0
 with col8:
     st.map(lat_long_df)
-    if st.button('Get mosaic df'):
+    if st.button('Get chip'):
         items =  aws_sentinel_retrieve_item(15, 70,start_date,end_date,[lon,lat])
         
         if items == 'failed':
