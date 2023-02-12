@@ -34,17 +34,17 @@ st.set_page_config(
 
 
 def scale_values(values):
-    # Get the minimum and maximum values
-    # max_value_allowed = 5000
-    min_value = np.min(values)
-    max_value = np.max(values)
-    # Calculate the range of the values
-    value_range = max_value - min_value
-    if value_range < 100:
-        print(value_range)
+    # # Get the minimum and maximum values
+    # # max_value_allowed = 5000
+    # min_value = np.min(values)
+    # max_value = np.max(values)
+    # # Calculate the range of the values
+    # value_range = max_value - min_value
+    if np.max(values)-np.min(values) < 700:
+        print(np.max(values)-np.min(values))
     
     # Scale the values to a range of 0 to 1
-    scaled_values = 255*((values - min_value) / value_range)
+    scaled_values = 255*((values - np.min(values)) / (np.max(values)-np.min(values)))
     scaled_values_int = np.rint(scaled_values)
 
     return  scaled_values_int 
