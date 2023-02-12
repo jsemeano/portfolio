@@ -104,7 +104,7 @@ def aws_sentinel_chip(item,area):
     max_lat = max(lat_geom)
     min_lat = min(lat_geom)
     
-    ind_item = (-min_lon+area[0])//(-min_lon+max_lon/61)
+    ind_item = (-min_lon+max_lon/61)
     # ind_item = (-min_lon+area[0])//(-min_lon+max_lon/61)*61 + (-min_lat+area[1])//(-min_lat+max_lat/61)
 
     # Merge each colour band independently and group them into a RGB array
