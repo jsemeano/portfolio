@@ -23,8 +23,9 @@ def scale_values(values):
     # max_value = np.max(values)
     # # Calculate the range of the values
     # value_range = max_value - min_value
-    if np.max(values)-np.min(values) < 700:
+    if np.max(values)-np.min(values) == 0:
         print(np.max(values)-np.min(values))
+        return None
     
     # Scale the values to a range of 0 to 1
     scaled_values = np.rint(255*((values - np.min(values)) / (np.max(values)-np.min(values))))
