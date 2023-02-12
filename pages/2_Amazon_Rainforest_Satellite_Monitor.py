@@ -184,9 +184,9 @@ def aws_sentinel_chip(items):
     # mosaic_rgb['rgb'] = mosaic_rgb.apply(lambda x: [scale_values(x['rgb'][:,:,0]),scale_values(x['rgb'][:,:,1]),scale_values(x['rgb'][:,:,2])], axis=1)
         
         # mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
-
+    scaled_rgb = []
     for index, row in mosaic_rgb.iterrows():
-        row['rgb'] = [scale_values(row['rgb'][:,:,0]),scale_values(row['rgb'][:,:,1]),scale_values(row['rgb'][:,:,2])]
+        scaled_rgb.append([scale_values(row['rgb'][:,:,0]),scale_values(row['rgb'][:,:,1]),scale_values(row['rgb'][:,:,2])])
     
     # print(mosaic_rgb[0])
    
