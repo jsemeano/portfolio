@@ -206,6 +206,7 @@ with col8:
         if items == 'failed':
             st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
         else:
+            print(items)
             mosaic_rgb  = aws_sentinel_chip(items)
             show_mosaic = 1
             
