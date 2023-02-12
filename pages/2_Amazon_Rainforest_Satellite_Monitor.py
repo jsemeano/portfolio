@@ -112,7 +112,7 @@ def aws_sentinel_chip(item):
                            mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
                           axis=2)
    
-    # mosaic_rgb = chipping(mosaic_rgb,256,0.3)
+    mosaic_rgb = chipping(mosaic_rgb,256,0.3)
     
     # mosaic_rgb = mosaic_rgb[0:3]
     
