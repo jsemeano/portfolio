@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 from datetime import date
 import numpy as np
-import time
+# import time
 from pystac_client import Client
 from shapely import geometry 
 import rioxarray
@@ -68,18 +68,18 @@ def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
 
     if search.matched() < 1:
         return 'failed'
+    
+    item = search.get_all_items()[pd.DataFrame(data = {'cloud_cover' : [item.properties['eo:cloud_cover'] for item in items]}).sort_values(by='cloud_cover').index[0]]
 
-    items = search.get_all_items()
+    return item
 
-    return items
-
-def aws_sentinel_chip(items):
+def aws_sentinel_chip(item):
 
     # Merge each colour band independently and group them into a RGB array
 
-    mosaic_red = rioxarray.open_rasterio(items[0].assets["B04"].href).values
-    mosaic_green = rioxarray.open_rasterio(items[0].assets["B03"].href).values
-    mosaic_blue = rioxarray.open_rasterio(items[0].assets["B02"].href).values
+    mosaic_red = rioxarray.open_rasterio(item.assets["B04"].href).values
+    mosaic_green = rioxarray.open_rasterio(item.assets["B03"].href).values
+    mosaic_blue = rioxarray.open_rasterio(item.assets["B02"].href).values
     
     
     # rasterio.open(items[0].assets['B04'].href) #for item in items]
@@ -115,7 +115,7 @@ def aws_sentinel_chip(items):
     # mosaic_rgb = mosaic_rgb[0:3]
     
     
-    mosaic_rgb['rgb'] = mosaic_rgb.apply(lambda x: [scale_values(x['rgb'][:,:,0]),scale_values(x['rgb'][:,:,1]),scale_values(x['rgb'][:,:,2])], axis=1)
+    # mosaic_rgb['rgb'] = mosaic_rgb.apply(lambda x: [scale_values(x['rgb'][:,:,0]),scale_values(x['rgb'][:,:,1]),scale_values(x['rgb'][:,:,2])], axis=1)
         
     # scaled_rgb = []
     # for index, row in mosaic_rgb.iterrows():
@@ -136,7 +136,7 @@ def aws_sentinel_chip(items):
     
     # chip_df = chipping(mosaic_rgb, 256, 0.3)
 
-    return mosaic_rgb #mosaic_rgb #chip_df
+    return mosaic_red #mosaic_rgb #chip_df
 
 
 
@@ -184,7 +184,7 @@ show_mosaic = 0
 with col8:
     st.map(lat_long_df)
     if st.button('Get mosaic df'):
-        items =  aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,[lat,lon])
+        items =  aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,[lon,lat])
         
         if items == 'failed':
             st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
@@ -194,8 +194,10 @@ with col8:
             
             
 if show_mosaic == 1:
-    st.write(mosaic_rgb.iloc[0]['rgb'])
-    st.write(mosaic_rgb.iloc[0]['rgb'].shape)
+    st.write(mosaic_rgb)
+    st.write(mosaic_rgb.shape)
+    # st.write(mosaic_rgb.iloc[0]['rgb'])
+    # st.write(mosaic_rgb.iloc[0]['rgb'].shape)
 
         
 
