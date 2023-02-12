@@ -29,7 +29,8 @@ def scale_values(values):
     
     # Scale the values to a range of 0 to 1
     scaled_values = np.rint(255*((values - np.min(values)) / (np.max(values)-np.min(values))))
-
+    scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
+    
     return  scaled_values 
     # return  (min_value, max_value, value_range) # scaled_values_int 
 
