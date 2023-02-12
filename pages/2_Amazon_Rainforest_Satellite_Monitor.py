@@ -175,6 +175,13 @@ def aws_sentinel_chip(items):
    
     mosaic_rgb = chipping(mosaic_rgb,256,0.3)
     
+    
+    mosaic_rgb['rgb'] = mosaic_rgb.apply(lambda x: [scale_values(x['rgb'][:,:,0]),scale_values(x['rgb'][:,:,1]),scale_values(x['rgb'][:,:,2])], axis=1)
+        
+        # mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
+
+    
+    
     # print(mosaic_rgb[0])
    
     # mosaic_red = scale_values(mosaic_red_r)
