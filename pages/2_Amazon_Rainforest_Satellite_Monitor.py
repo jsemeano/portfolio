@@ -2,28 +2,11 @@
 import streamlit as st
 import pandas as pd
 from datetime import date
-# from amazon_functions.gee import authentication
 import numpy as np
-# import geemap
-# import tensorflow as tf
-# import tensorflow_hub as hub
-# import matplotlib.pyplot as plt
 import time
-import PIL 
-# import cv2
-# from google.cloud import storage
-import io
-# import pystac
-# import pystac_client
 from pystac_client import Client
 from shapely import geometry 
-
-#import Point#, Polygon
-# from shapely.geometry import Point
 import rioxarray
-# from rioxarray.merge import merge_arrays
-import rasterio
-
 
 st.set_page_config(
     page_title='Amazon_alert',
@@ -44,111 +27,55 @@ def scale_values(values):
         print(np.max(values)-np.min(values))
     
     # Scale the values to a range of 0 to 1
-    scaled_values = 255*((values - np.min(values)) / (np.max(values)-np.min(values)))
-    scaled_values_int = np.rint(scaled_values)
+    scaled_values = np.rint(255*((values - np.min(values)) / (np.max(values)-np.min(values))))
 
-    return  scaled_values_int 
+    return  scaled_values 
     # return  (min_value, max_value, value_range) # scaled_values_int 
 
 
 def chipping(mosaic,dist,overlap):
-    
-    # calculate the distance of top left corners
-    x_step = int((1-overlap)*dist)
-    y_step = int((1-overlap)*dist)
-    
+       
     # calculate longitudes of top left corner    
-    vec_x = x_step*np.arange(0,int(mosaic.shape[0]//x_step),1)
+    vec_x = int((1-overlap)*dist)*np.arange(0,int(mosaic.shape[0]//int((1-overlap)*dist)),1)
     vec_x[-1] = mosaic.shape[0]-dist
     
     # calculate latitudes of top left corner
-    vec_y = y_step*np.arange(0,int(mosaic.shape[1]//y_step),1)    
+    vec_y = int((1-overlap)*dist)*np.arange(0,int(mosaic.shape[1]//int((1-overlap)*dist)),1)    
     vec_y[-1] = mosaic.shape[1]-dist
-    
-    # generate matrix of top left corners llongitude and latitude
-    top_left_M = np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2)
-    
-    print(f'List contains {len(top_left_M)} chips')
-    
+        
     # create the data frame with longitude and latitude of both corners of the chip
-    chip_df = pd.DataFrame(data=top_left_M, columns=['x_top_left', 'y_top_left'])
+    chip_df = pd.DataFrame(data=np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2), columns=['x_top_left', 'y_top_left'])
     
     chip_df['x_bottom_right'] = chip_df.apply(lambda x: x['x_top_left']+dist , axis=1)
     chip_df['y_bottom_right'] = chip_df.apply(lambda x: x['y_top_left']+dist , axis=1)
     
     chip_df['rgb'] = chip_df.apply(lambda x: mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
-    
-
-    # chip_df['thumbnail'] = chip_df.apply(lambda x: f"{ x['x_top_left'] }_{ x['y_top_left'] }.jpg", axis=1)
-    
-    def create_thumbnail(img_array,name,dist):
-        # Create an Image object from the numpy array
-        img_jpg = PIL.Image.fromarray(img_array, mode = 'RGB')
-        # plt.imshow(img_jpg)
-        img_jpg.save(f"pics/{name}")
-
-    
-    # for  ind, chip in chip_df.iterrows():
-    #     create_thumbnail(chip['rgb'],chip['thumbnail'],dist)
-    
-    
+  
     return chip_df
-
-
-
 
 def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
     
-
-    ## source
-
-    api_url = "https://earth-search.aws.element84.com/v0"
-    client = Client.open(api_url)
-    
-    # define area of interest
-
-    # areas_list = [[-73.434884,-8.811260,-72.683737,-9.205097]]
-
-    # 3578.46 sqkm close to the point William mentioned (I think)
-
-    # area = areas_list[0]
-    # coords =((area[0],area[1]),(area[0],area[3]),(area[2],area[3]),(area[2],area[1]), (area[0],area[1]))
-    # point = Polygon(coords)
-
-    point = geometry.Point(area[0],area[1])
-    # download images from S2 AWS bucket
-
-    collection = "sentinel-s2-l2a-cogs"  # Sentinel-2, Level 2A, COGs
-
-    search = client.search(
-        collections=[collection],
-        intersects=point,
+    search = Client.open("https://earth-search.aws.element84.com/v0").search(
+        collections=["sentinel-s2-l2a-cogs"],
+        intersects=geometry.Point(area[0],area[1]),
         max_items=max_items,
         datetime=f"{start_date}/{end_date}",
         query=[f"eo:cloud_cover<{cloud_cover}"]
         # resolution  =10
     )
 
-    print(search.matched())
-
-
     # create dataframe with main metadata and thumbnails
-    
+
     if search.matched() < 1:
         return 'failed'
-    
+
     items = search.get_all_items()
-    
+
     return items
-
-        
-
 
 def aws_sentinel_chip(items):
 
     # Merge each colour band independently and group them into a RGB array
-
-    start_mos = time.time()
 
     mosaic_red = rioxarray.open_rasterio(items[0].assets["B04"].href).values
     mosaic_green = rioxarray.open_rasterio(items[0].assets["B03"].href).values
@@ -170,23 +97,29 @@ def aws_sentinel_chip(items):
     
     
     
-    mosaic_red_r = mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2]))
-    mosaic_green_r = mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2]))
-    mosaic_blue_r = mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))
+    # mosaic_red = mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2]))
+    # mosaic_green = mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2]))
+    # mosaic_blue = mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))
    
-    mosaic_rgb = np.stack([mosaic_red_r, mosaic_green_r, mosaic_blue_r], axis=2)
+    # mosaic_rgb = np.stack([mosaic_red, mosaic_green, mosaic_blue], axis=2)    
+    
+    
+
+    mosaic_rgb = np.stack([mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])), 
+                           mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])), 
+                           mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
+                          axis=2)
    
     mosaic_rgb = chipping(mosaic_rgb,256,0.3)
     
     # mosaic_rgb = mosaic_rgb[0:3]
     
     
-    # mosaic_rgb['rgb'] = mosaic_rgb.apply(lambda x: [scale_values(x['rgb'][:,:,0]),scale_values(x['rgb'][:,:,1]),scale_values(x['rgb'][:,:,2])], axis=1)
+    mosaic_rgb['rgb'] = mosaic_rgb.apply(lambda x: [scale_values(x['rgb'][:,:,0]),scale_values(x['rgb'][:,:,1]),scale_values(x['rgb'][:,:,2])], axis=1)
         
-        # mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
-    scaled_rgb = []
-    for index, row in mosaic_rgb.iterrows():
-        scaled_rgb.append([scale_values(row['rgb'][:,:,0]),scale_values(row['rgb'][:,:,1]),scale_values(row['rgb'][:,:,2])])
+    # scaled_rgb = []
+    # for index, row in mosaic_rgb.iterrows():
+    #     scaled_rgb.append([scale_values(row['rgb'][:,:,0]),scale_values(row['rgb'][:,:,1]),scale_values(row['rgb'][:,:,2])])
     
     # print(mosaic_rgb[0])
    
@@ -208,8 +141,6 @@ def aws_sentinel_chip(items):
 
 
 col1, col2 = st.columns(2)
-
-# (max_items, cloud_cover,start_date,end_date,area)
 
 with col1:
     cloud_cover = st.slider('Maximum cloud cover (%)',  50, 100, 75)
