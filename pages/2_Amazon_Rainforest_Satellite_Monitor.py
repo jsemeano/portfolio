@@ -196,7 +196,7 @@ with col8:
             
             
 if show_mosaic == 1:
-    st.write(mosaic_rgb)
+    # st.write(mosaic_rgb)
     st.write(mosaic_rgb.shape)
     # st.write(mosaic_rgb.iloc[0]['rgb'])
     # st.write(mosaic_rgb.iloc[0]['rgb'].shape)
