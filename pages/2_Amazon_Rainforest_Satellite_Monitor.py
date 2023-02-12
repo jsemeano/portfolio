@@ -173,7 +173,7 @@ def aws_sentinel_chip(items):
    
     mosaic_rgb = np.stack([mosaic_red_r, mosaic_green_r, mosaic_blue_r], axis=2)
    
-    mosaic_rgb = chipping(mosaic_rgb)
+    mosaic_rgb = chipping(mosaic_rgb,256,0.3)
    
     # mosaic_red = scale_values(mosaic_red_r)
     
