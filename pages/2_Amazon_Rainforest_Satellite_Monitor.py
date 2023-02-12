@@ -98,24 +98,24 @@ def aws_sentinel_chip(item):
 
     # Merge each colour band independently and group them into a RGB array
 
-    mosaic_red = rioxarray.open_rasterio(item.assets["B04"].href).values
-    mosaic_green = rioxarray.open_rasterio(item.assets["B03"].href).values
-    mosaic_blue = rioxarray.open_rasterio(item.assets["B02"].href).values  
+    # mosaic_red = rioxarray.open_rasterio(item.assets["B04"].href).values
+    # mosaic_green = rioxarray.open_rasterio(item.assets["B03"].href).values
+    # mosaic_blue = rioxarray.open_rasterio(item.assets["B02"].href).values  
 
-    mosaic_rgb = np.stack([mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])), 
-                           mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])), 
-                           mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
-                          axis=2)
+    # mosaic_rgb = np.stack([mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])), 
+    #                        mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])), 
+    #                        mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
+    #                       axis=2)
     
-    print(f'red : max - {np.max(mosaic_red)} , min - {np.min(mosaic_red)} ')
-    print(f'green : max - {np.max(mosaic_green)} , min - {np.min(mosaic_green)} ')
-    print(f'blue : max - {np.max(mosaic_blue)} , min - {np.min(mosaic_blue)} ')
+    # print(f'red : max - {np.max(mosaic_red)} , min - {np.min(mosaic_red)} ')
+    # print(f'green : max - {np.max(mosaic_green)} , min - {np.min(mosaic_green)} ')
+    # print(f'blue : max - {np.max(mosaic_blue)} , min - {np.min(mosaic_blue)} ')
     
-    del mosaic_blue
-    del mosaic_green
-    del mosaic_red
+    # del mosaic_blue
+    # del mosaic_green
+    # del mosaic_red
    
-    mosaic_rgb = chipping(mosaic_rgb,256,0.3)
+    # mosaic_rgb = chipping(mosaic_rgb,256,0.3)
 
     # mosaic_rgb = mosaic_rgb.iloc[2000]['rgb']
     
