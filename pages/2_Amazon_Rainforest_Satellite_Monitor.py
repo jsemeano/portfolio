@@ -232,12 +232,8 @@ with col8:
             show_mosaic = 1
             
             
-if show_mosaic == 1:
-    st.image(mosaic_rgb, clamp=True, channels='RGB')
-    st.write(mosaic_rgb.shape)
-    st.write(mosaic_rgb)
-    # st.write(mosaic_rgb.iloc[0]['rgb'])
-    # st.write(mosaic_rgb.iloc[0]['rgb'].shape)
+    if show_mosaic == 1:
+        st.image(mosaic_rgb, clamp=True, channels='RGB')
 
         
 
