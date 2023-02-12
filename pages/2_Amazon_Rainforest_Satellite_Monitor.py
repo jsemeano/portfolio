@@ -157,7 +157,7 @@ with col3:
 
 with col4:
     end_date = st.slider("When do you stop?",
-                        value=date(2022, 1, 2),
+                        value=date(2023, 2, 10),
                         format="DD/MM/YY")
     
     
