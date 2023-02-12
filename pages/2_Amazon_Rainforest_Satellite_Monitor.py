@@ -73,6 +73,8 @@ def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
     items = search.get_all_items()
     
     item = items[pd.DataFrame(data = {'cloud_cover' : [item.properties['eo:cloud_cover'] for item in items]}).sort_values(by='cloud_cover').index[0]]
+    
+    del items
 
     return item
 
@@ -112,6 +114,10 @@ def aws_sentinel_chip(item):
                            mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])), 
                            mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))], 
                           axis=2)
+    
+    del mosaic_blue
+    del mosaic_green
+    del mosaic_red
    
     mosaic_rgb = chipping(mosaic_rgb,256,0.3)
     
