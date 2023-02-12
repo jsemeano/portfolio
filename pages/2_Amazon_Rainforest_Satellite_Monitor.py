@@ -25,6 +25,13 @@ import rioxarray
 import rasterio
 
 
+st.set_page_config(
+    page_title='Amazon_alert',
+    page_icon=':palm_tree:',
+    layout="wide",
+    initial_sidebar_state="auto",
+    menu_items=None)
+
 
 def scale_values(values):
     # Get the minimum and maximum values
@@ -34,10 +41,11 @@ def scale_values(values):
     # Calculate the range of the values
     value_range = max_value - min_value
     # Scale the values to a range of 0 to 1
-    # scaled_values = 255*((values - min_value) / value_range)
-    # scaled_values_int = np.rint(scaled_values)
+    scaled_values = 255*((values - min_value) / value_range)
+    scaled_values_int = np.rint(scaled_values)
 
-    return  (min_value, max_value, value_range) # scaled_values_int 
+    return  scaled_values_int 
+    # return  (min_value, max_value, value_range) # scaled_values_int 
 
 
 def chipping(mosaic,dist,overlap):
@@ -158,8 +166,14 @@ def aws_sentinel_chip(items):
     
     
     mosaic_red_r = mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2]))
+    mosaic_green_r = mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2]))
+    mosaic_blue_r = mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2]))
    
-    mosaic_red = scale_values(mosaic_red_r)
+   
+   
+   
+   
+    # mosaic_red = scale_values(mosaic_red_r)
     
     
     
@@ -172,14 +186,7 @@ def aws_sentinel_chip(items):
     
     # chip_df = chipping(mosaic_rgb, 256, 0.3)
 
-    return mosaic_red #mosaic_rgb #chip_df
-
-st.set_page_config(
-    page_title='Amazon_alert',
-    page_icon=':palm_tree:',
-    layout="wide",
-    initial_sidebar_state="auto",
-    menu_items=None)
+    return mosaic_red_r #mosaic_rgb #chip_df
 
 
 
@@ -239,8 +246,8 @@ with col8:
             
             
 if show_mosaic == 1:
-    st.write(mosaic_rgb)
-    # st.write(mosaic_rgb.shape)
+    # st.write(mosaic_rgb)
+    st.write(mosaic_rgb.shape)
 
         
 
