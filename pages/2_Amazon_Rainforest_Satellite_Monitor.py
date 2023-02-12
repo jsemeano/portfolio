@@ -56,9 +56,11 @@ def chipping(mosaic,dist,overlap):
     
     # calculate longitudes of top left corner    
     vec_x = x_step*np.arange(0,int(mosaic.shape[0]//x_step),1)
+    vec_x[-1] = mosaic.shape[0]-dist
     
     # calculate latitudes of top left corner
     vec_y = y_step*np.arange(0,int(mosaic.shape[1]//y_step),1)    
+    vec_y[-1] = mosaic.shape[1]-dist
     
     # generate matrix of top left corners llongitude and latitude
     top_left_M = np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2)
@@ -171,7 +173,7 @@ def aws_sentinel_chip(items):
    
     mosaic_rgb = np.stack([mosaic_red_r, mosaic_green_r, mosaic_blue_r], axis=2)
    
-   
+    mosaic_rgb = chipping(mosaic_rgb)
    
     # mosaic_red = scale_values(mosaic_red_r)
     
@@ -246,8 +248,8 @@ with col8:
             
             
 if show_mosaic == 1:
-    # st.write(mosaic_rgb)
-    st.write(mosaic_rgb.shape)
+    st.write(mosaic_rgb[0])
+    # st.write(mosaic_rgb.shape)
 
         
 
