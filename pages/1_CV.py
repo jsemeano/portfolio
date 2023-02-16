@@ -363,11 +363,8 @@ with soft_skill_tab:
 
 
 with cert_tab:
-    st.header('These are my future plans:')
+    st.header('Work certificates')
     st.markdown('''
-                * Web scraping feature for job description extraction with a link
-                * Company homepage design for a color palette feature with a link
-                * Fonts extraction feature
-                * Documents modifier feature
+                ### European Central Bank
                 '''
                 )
