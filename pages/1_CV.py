@@ -24,7 +24,7 @@ prof_tab, edu_tab, tech_skill_tab, soft_skill_tab, cert_tab = st.tabs(['Professi
 def bar_chart(skill_num):
     
     if skill_num == 100:
-        skill_num = 99.9999
+        skill_num = 99.9
 
     fig, ax = plt.subplots( figsize=(10, 0.1))
         
