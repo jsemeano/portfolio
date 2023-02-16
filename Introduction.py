@@ -28,7 +28,9 @@ st.markdown('''
             # Hi! :hatching_chick: 
             ## My name is João Domingues Semeano and I welcome you to my portfolio page
             
-            ### After several years working in mechanical engineering and central banking, I decided to refocus on data science. After completing a data science bootcamp I am looking for a position where I can develop my ETL and machine learning skills to unlock the meaningful stories behind big data.
+            ### After several years working in mechanical engineering and central banking, I decided to refocus on data science. 
+            ### I used my sabbatical to complete a data science bootcamp and update my knowldge on cloud data management techniques.
+            ### I am looking for a position where I can develop my ETL and machine learning skills to unlock the meaningful stories behind big data.
             
             In this page you find:
             1. My CV with professional experience, education and certifications
