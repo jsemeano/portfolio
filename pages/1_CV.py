@@ -6,6 +6,7 @@ import numpy as np
 
 st.set_page_config(
     page_title='Joao Semeano CV',
+    page_icon=':palm_tree:',
     layout="wide",
     initial_sidebar_state="auto",
     menu_items=None)
@@ -17,7 +18,7 @@ st.markdown('''
             ''')
 
 
-prof_tab, edu_tab, tech_skill_tab, soft_skill_tab, cert_tab = st.tabs(['Professional experience', 'Education', 'Technical skills', 'Soft skills', 'Certificates'])
+prof_tab, edu_tab, tech_skill_tab, soft_skill_tab = st.tabs(['Professional experience', 'Education', 'Technical skills', 'Soft skills'])
 
 
 
