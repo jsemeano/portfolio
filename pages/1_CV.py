@@ -147,17 +147,17 @@ with skill_tab:
     cols[5].markdown(':red_circle:')
     
     # option with bars
-    
-    fig, ax = plt.subplots()
+    with cols[6]:
+        fig, ax = plt.subplots()
 
-    ax.barh(1, 50, align='center')
-    
-    st.pyplot(fig)
-    
-    st.markdown('''
-                ### Software
-                '''
-                )
+        ax.barh(1, 50, align='center')
+        
+        st.pyplot(fig)
+        
+        st.markdown('''
+                    ### Software
+                    '''
+                    )
     
     cols = st.columns([9, 1, 1, 1, 1, 1])
     
