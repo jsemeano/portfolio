@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-import plotly.graph_objects as go
+# import plotly.graph_objects as go
 
 st.set_page_config(
     page_title='Joao Semeano CV',
