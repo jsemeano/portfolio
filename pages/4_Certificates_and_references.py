@@ -25,7 +25,7 @@ with prof_tab:
     with st.expander('European Central Bank'):
         
         # st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
-        img = Image.open(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+        img = Image.open(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg','Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001')
         
         st.image(img)
 
