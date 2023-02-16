@@ -8,6 +8,7 @@ from pystac_client import Client
 from shapely import geometry 
 import rioxarray
 
+
 st.set_page_config(
     page_title='Amazon_alert',
     page_icon=':palm_tree:',
@@ -34,7 +35,6 @@ st.set_page_config(
 #     return  scaled_values 
 #     # return  (min_value, max_value, value_range) # scaled_values_int 
 
-
 def scale_values(values):
     # Get the minimum and maximum values
     max_value_allowed = 5000
@@ -45,27 +45,27 @@ def scale_values(values):
     # Scale the values to a range of 0 to 1
     scaled_values = np.array([255*((value - min_value) / value_range) for value in values]).astype(int)
     scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
-    
+
     return  scaled_values
 
 def chipping(mosaic,dist,overlap):
-       
+
     # calculate longitudes of top left corner    
     vec_x = int((1-overlap)*dist)*np.arange(0,int(mosaic.shape[0]//int((1-overlap)*dist)),1)
     vec_x[-1] = mosaic.shape[0]-dist
-    
+
     # calculate latitudes of top left corner
     vec_y = int((1-overlap)*dist)*np.arange(0,int(mosaic.shape[1]//int((1-overlap)*dist)),1)    
     vec_y[-1] = mosaic.shape[1]-dist
-        
+
     # create the data frame with longitude and latitude of both corners of the chip
     chip_df = pd.DataFrame(data=np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2), columns=['x_top_left', 'y_top_left'])
-    
+
     chip_df['x_bottom_right'] = chip_df.apply(lambda x: x['x_top_left']+dist , axis=1)
     chip_df['y_bottom_right'] = chip_df.apply(lambda x: x['y_top_left']+dist , axis=1)
-    
+
     chip_df['rgb'] = chip_df.apply(lambda x: mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
-  
+
     return chip_df
 
 def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
