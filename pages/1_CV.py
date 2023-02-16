@@ -21,8 +21,14 @@ prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Ed
 
 
 
-# def bar_chart(skill_num):
+def bar_chart(skill_num):
+    fig, ax = plt.subplots( figsize=(10, 0.3))
+
+    b1 = ax.barh(1, skill_num, color="red")
+    b2 = ax.barh(1, 100-skill_num, left=skill_num, color="gainsboro")
+    ax.set_axis_off()
     
+    return fig
 
 
 
@@ -149,18 +155,8 @@ with skill_tab:
     
     # option with bars
     with cols[6]:
-        fig, ax = plt.subplots( figsize=(10, 0.3))
-
-        num_size = 50
-
-
-        b1 = ax.barh(1, num_size, color="red")
-        b2 = ax.barh(1, 100-num_size, left=num_size, color="silver")
-
-        # (1, 50, align='center')
-        ax.set_axis_off()
-        
-        st.pyplot(fig)
+       
+        st.pyplot(bar_chart(50))
         
     st.markdown('''
                 ### Software
