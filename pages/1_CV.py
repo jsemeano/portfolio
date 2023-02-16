@@ -148,7 +148,7 @@ with skill_tab:
     
     # option with bars
     with cols[6]:
-        fig, ax = plt.subplots( figsize=(15, 1))
+        fig, ax = plt.subplots( figsize=(10, 0.5))
 
         ax.barh(1, 50, align='center')
         
