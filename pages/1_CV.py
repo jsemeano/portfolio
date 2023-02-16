@@ -133,7 +133,7 @@ with skill_tab:
                 '''
                 )
     
-    cols = st.columns([9, 1, 1, 1, 1, 1])
+    cols = st.columns([9, 1, 1, 1, 1, 1, 20])
     
     cols[0].markdown('Data Analysis')
     cols[1].markdown(':red_circle:')
