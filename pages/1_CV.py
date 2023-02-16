@@ -166,6 +166,8 @@ with tech_skill_tab:
        
         st.pyplot(bar_chart(100))
             
+    cols = st.columns([9,20])
+            
     cols[0].markdown('ETL pipelines')
     with cols[1]:
        
@@ -266,6 +268,8 @@ with tech_skill_tab:
             ### Python packages
             '''
             )
+    
+    cols = st.columns([9,20])
 
     cols[0].markdown('Pandas')
     with cols[1]:
