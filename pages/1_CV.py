@@ -2,6 +2,7 @@ import streamlit as st
 import os
 # import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+import numpy as np
 
 st.set_page_config(
     page_title='Joao Semeano CV',
@@ -150,7 +151,14 @@ with skill_tab:
     with cols[6]:
         fig, ax = plt.subplots( figsize=(10, 0.5))
 
-        ax.barh(1, 50, align='center')
+        num_size = 50
+
+
+        b1 = ax.barh(1, num_size, color="red")
+        b2 = ax.barh(1, 100-num_size, left=num_size, color="yellow")
+
+        # (1, 50, align='center')
+        ax.set_axis_off()
         
         st.pyplot(fig)
         
