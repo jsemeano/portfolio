@@ -362,10 +362,3 @@ with soft_skill_tab:
             '''
             )   
 
-
-with cert_tab:
-    st.header('Work certificates')
-    st.markdown('''
-                ### European Central Bank
-                '''
-                )
