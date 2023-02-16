@@ -143,18 +143,21 @@ with skill_tab:
     
     
     
-    # Option with points
-    cols = st.columns([9, 1, 1, 1, 1, 1, 20])
+    # # Option with points
+    # cols = st.columns([9, 1, 1, 1, 1, 1, 20])
     
-    cols[0].markdown('Data Analysis')
-    cols[1].markdown(':red_circle:')
-    cols[2].markdown(':red_circle:')
-    cols[3].markdown(':red_circle:')
-    cols[4].markdown(':red_circle:')
-    cols[5].markdown(':red_circle:')
+    # cols[0].markdown('Data Analysis')
+    # cols[1].markdown(':red_circle:')
+    # cols[2].markdown(':red_circle:')
+    # cols[3].markdown(':red_circle:')
+    # cols[4].markdown(':red_circle:')
+    # cols[5].markdown(':red_circle:')
     
     # option with bars
-    with cols[6]:
+    cols = st.columns([9, 20])
+    
+    cols[0].markdown('Data Analysis')
+    with cols[1]:
        
         st.pyplot(bar_chart(50))
         
