@@ -12,7 +12,7 @@ st.set_page_config(
     menu_items=None)
 
 
-base_path = f'bucket/'
+base_path = 'bucket/'
 
 prof_tab, edu_tab, tech_skill_tab, lang = st.tabs(['Professional experience', 'Education', 'Online technical certifications', 'Languages'])
 
@@ -23,7 +23,10 @@ with prof_tab:
 
     with st.expander('European Central Bank'):
         
-        st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+        # st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+
+        
+        st.image(f'Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
 
 
 
@@ -31,9 +34,9 @@ with edu_tab:
     
     subfolder = 'academic_life'
 
-    with st.expander('European Central Bank'):
+    # with st.expander('European Central Bank'):
         
-        st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+    #     st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
 
 
 
