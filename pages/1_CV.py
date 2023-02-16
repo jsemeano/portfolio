@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 # import plotly.graph_objects as go
+import matplotlib.pyplot as plt
 
 st.set_page_config(
     page_title='Joao Semeano CV',
@@ -133,6 +134,9 @@ with skill_tab:
                 '''
                 )
     
+    
+    
+    # Option with points
     cols = st.columns([9, 1, 1, 1, 1, 1, 20])
     
     cols[0].markdown('Data Analysis')
@@ -141,6 +145,14 @@ with skill_tab:
     cols[3].markdown(':red_circle:')
     cols[4].markdown(':red_circle:')
     cols[5].markdown(':red_circle:')
+    
+    # option with bars
+    
+    fig, ax = plt.subplots()
+
+    ax.barh(1, 50, align='center')
+    
+    st.pyplot(fig)
     
     st.markdown('''
                 ### Software
