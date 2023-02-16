@@ -17,7 +17,7 @@ st.markdown('''
             ''')
 
 
-prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Education', 'Skills', 'Certificates'])
+prof_tab, edu_tab, tech_skill_tab, soft_skill_tab, cert_tab = st.tabs(['Professional experience', 'Education', 'Technical skills', 'Soft skills', 'Certificates'])
 
 
 
@@ -135,7 +135,7 @@ with edu_tab:
         
         
 
-with skill_tab:
+with tech_skill_tab:
     st.markdown('''
                 ### Technical skills
                 '''
@@ -157,7 +157,33 @@ with skill_tab:
     # cols = st.columns([9, 1, 1, 1, 1, 1, 20])
     cols = st.columns([9,20])
     
-    cols[0].markdown('Data Analysis')
+    cols[0].markdown('Data analysis')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(100))
+            
+    cols[0].markdown('ETL pipelines')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(100))        
+            
+    cols[0].markdown('Statistical modelling')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(100))
+        
+                    
+    cols[0].markdown('Bayesian analysis')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(75))
+                    
+    cols[0].markdown('Machine learning')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(50))
+        
+    cols[0].markdown('GIS')
     with cols[1]:
        
         st.pyplot(bar_chart(50))
@@ -167,16 +193,77 @@ with skill_tab:
                 '''
                 )
     
-    cols = st.columns([9, 1, 1, 1, 1, 1])
+    cols = st.columns([9,20])
     
-    cols[0].write('Data Analysis')
+    cols[0].markdown('Python')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(100))
         
+    cols[0].markdown('Excel/VBA')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(100))
+        
+    cols[0].markdown('SQL')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(75))
+        
+    cols[0].markdown('Git')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(75))
+        
+    cols[0].markdown('Google cloud platform')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(50))
+
+    cols[0].markdown('Amazon Warehouse Services')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(50))
+        
+    cols[0].markdown('Docker')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))
+
+    cols[0].markdown('dbt')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))        
+    cols[0].markdown('Snowflake')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))
+
+    cols[0].markdown('Looker')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))
+ 
+    cols[0].markdown('MLFlow')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))        
+    cols[0].markdown('Uvicorn')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))
+
+    cols[0].markdown('R')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))           
+ 
     st.markdown('''
             ### Python packages
             '''
             )
     
-    
+   
     
 with cert_tab:
     st.header('These are my future plans:')
