@@ -33,7 +33,7 @@ with edu_tab:
 
     with st.expander('European Central Bank'):
         
-        st.image(f'{base_path}{subfolder}/Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3.pdf')
+        st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
 
 
 
