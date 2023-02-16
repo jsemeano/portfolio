@@ -31,12 +31,12 @@ with prof_tab:
     with st.expander('European Central Bank'):
         
         # st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
-        img = Image.open(BytesIO(requests.get(f'{base_url}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001{suffix}').content))
+        # img = Image.open(BytesIO(requests.get(f'{base_url}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001{suffix}').content))
         
         # response = requests.get(f'{base_url}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg{suffix}')
         # img = Image.open(BytesIO(response.content))
         
-        st.image(img)
+        st.image(f'{base_url}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001')
 
 
 
