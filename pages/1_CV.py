@@ -154,10 +154,10 @@ with skill_tab:
     # cols[5].markdown(':red_circle:')
     
     # option with bars
-    cols = st.columns([9, 20])
+    cols = st.columns([9, 1, 1, 1, 1, 1, 20])
     
     cols[0].markdown('Data Analysis')
-    with cols[1]:
+    with cols[6]:
        
         st.pyplot(bar_chart(50))
         
