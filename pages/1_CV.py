@@ -173,22 +173,26 @@ with tech_skill_tab:
        
         st.pyplot(bar_chart(100))        
             
+    cols = st.columns([9,20])           
     cols[0].markdown('Statistical modelling')
     with cols[1]:
        
         st.pyplot(bar_chart(100))
         
-                    
+            
+    cols = st.columns([9,20])                    
     cols[0].markdown('Bayesian analysis')
     with cols[1]:
        
         st.pyplot(bar_chart(75))
-                    
+            
+    cols = st.columns([9,20])                    
     cols[0].markdown('Machine learning')
     with cols[1]:
        
         st.pyplot(bar_chart(50))
-        
+            
+    cols = st.columns([9,20])        
     cols[0].markdown('GIS')
     with cols[1]:
        
@@ -205,60 +209,75 @@ with tech_skill_tab:
     with cols[1]:
        
         st.pyplot(bar_chart(100))
-        
+            
+    cols = st.columns([9,20])        
     cols[0].markdown('Excel/VBA')
     with cols[1]:
        
         st.pyplot(bar_chart(100))
-        
+            
+    cols = st.columns([9,20])        
     cols[0].markdown('SQL')
     with cols[1]:
        
         st.pyplot(bar_chart(75))
-        
+            
+    cols = st.columns([9,20])        
     cols[0].markdown('Git')
     with cols[1]:
        
         st.pyplot(bar_chart(75))
-        
+            
+    cols = st.columns([9,20])        
     cols[0].markdown('Google cloud platform')
     with cols[1]:
        
         st.pyplot(bar_chart(50))
-
+            
+    cols = st.columns([9,20])
     cols[0].markdown('Amazon Warehouse Services')
     with cols[1]:
        
         st.pyplot(bar_chart(50))
-        
+            
+    cols = st.columns([9,20])        
     cols[0].markdown('Docker')
     with cols[1]:
        
         st.pyplot(bar_chart(25))
-
+            
+    cols = st.columns([9,20])
     cols[0].markdown('dbt')
     with cols[1]:
        
         st.pyplot(bar_chart(25))        
+            
+    cols = st.columns([9,20])
     cols[0].markdown('Snowflake')
     with cols[1]:
        
         st.pyplot(bar_chart(25))
-
+            
+    cols = st.columns([9,20])
     cols[0].markdown('Looker')
     with cols[1]:
        
         st.pyplot(bar_chart(25))
  
+            
+    cols = st.columns([9,20])
     cols[0].markdown('MLFlow')
     with cols[1]:
        
         st.pyplot(bar_chart(25))        
+            
+    cols = st.columns([9,20])
     cols[0].markdown('Uvicorn')
     with cols[1]:
        
         st.pyplot(bar_chart(25))
-
+            
+    cols = st.columns([9,20])
     cols[0].markdown('R')
     with cols[1]:
        
@@ -275,35 +294,44 @@ with tech_skill_tab:
     with cols[1]:
        
         st.pyplot(bar_chart(100))
- 
+            
+    cols = st.columns([9,20]) 
     cols[0].markdown('Numpy')
     with cols[1]:
 
-        st.pyplot(bar_chart(100))        
+        st.pyplot(bar_chart(100))
+            
+    cols = st.columns([9,20])        
     cols[0].markdown('Matplotlib/Seaborn')
     with cols[1]:
        
         st.pyplot(bar_chart(75))
-
+            
+    cols = st.columns([9,20])
     cols[0].markdown('TensorFlow/Keras')
     with cols[1]:
        
         st.pyplot(bar_chart(75))         
- 
+            
+    cols = st.columns([9,20]) 
     cols[0].markdown('SKLearn')
     with cols[1]:
 
-        st.pyplot(bar_chart(75))        
+        st.pyplot(bar_chart(75))    
+            
+    cols = st.columns([9,20])    
     cols[0].markdown('FastApi')
     with cols[1]:
        
         st.pyplot(bar_chart(50))
-
+            
+    cols = st.columns([9,20])
     cols[0].markdown('Geopandas')
     with cols[1]:
        
         st.pyplot(bar_chart(25))     
-
+            
+    cols = st.columns([9,20])
     cols[0].markdown('Rasterio')
     with cols[1]:
        
