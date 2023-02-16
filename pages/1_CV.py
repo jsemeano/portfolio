@@ -266,9 +266,70 @@ with tech_skill_tab:
             ### Python packages
             '''
             )
+
+    cols[0].markdown('Pandas')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(100))
+ 
+    cols[0].markdown('Numpy')
+    with cols[1]:
+
+        st.pyplot(bar_chart(100))        
+    cols[0].markdown('Matplotlib/Seaborn')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(75))
+
+    cols[0].markdown('TensorFlow/Keras')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(75))         
+ 
+    cols[0].markdown('SKLearn')
+    with cols[1]:
+
+        st.pyplot(bar_chart(75))        
+    cols[0].markdown('FastApi')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(50))
+
+    cols[0].markdown('Geopandas')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))     
+
+    cols[0].markdown('Rasterio')
+    with cols[1]:
+       
+        st.pyplot(bar_chart(25))     
+
+
+with soft_skill_tab:
+ 
+    st.markdown('''
+            ### Working style
+            
+            * Curious
+            * Proactive
+            * Team player 
+            * Pragmatic}
+            '''
+            )   
     
-   
-    
+ 
+    st.markdown('''
+            ### Languages
+            
+            * Portuguese (Native)
+            * English (C2)
+            * German (B2)
+            * Spanish (B2)
+            '''
+            )   
+
+
 with cert_tab:
     st.header('These are my future plans:')
     st.markdown('''
