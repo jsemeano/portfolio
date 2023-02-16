@@ -22,7 +22,7 @@ prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Ed
 
 
 def bar_chart(skill_num):
-    fig, ax = plt.subplots( figsize=(10, 0.3))
+    fig, ax = plt.subplots( figsize=(10, 0.1))
 
     b1 = ax.barh(1, skill_num, color="red")
     b2 = ax.barh(1, 100-skill_num, left=skill_num, color="gainsboro")
@@ -154,10 +154,11 @@ with skill_tab:
     # cols[5].markdown(':red_circle:')
     
     # option with bars
-    cols = st.columns([9, 1, 1, 1, 1, 1, 20])
+    # cols = st.columns([9, 1, 1, 1, 1, 1, 20])
+    cols = st.columns([9,20])
     
     cols[0].markdown('Data Analysis')
-    with cols[6]:
+    with cols[1]:
        
         st.pyplot(bar_chart(50))
         
