@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import plotly.graph_objects as go
 
 st.set_page_config(
     page_title='Joao Semeano CV',
@@ -15,6 +16,14 @@ st.markdown('''
 
 
 prof_tab, edu_tab, skill_tab, cert_tab = st.tabs(['Professional experience', 'Education', 'Skills', 'Certificates'])
+
+
+
+# def bar_chart(skill_num):
+    
+
+
+
 
 with prof_tab:
     
@@ -90,7 +99,12 @@ with edu_tab:
         st.markdown(''':round_pushpin: Berlin, Germany''')
         st.markdown('''
                     * ETL machine learning bootcamp
-                    * Final project: Image search through sketch (Convolutional Neural Network with custom triplet loss function to suggest pictures similar to a user’s sketch)''')
+                        * Deep dive on SKLearn and TensorFlow
+                        * Introduction to cloud environments with Google Cloud Platform
+                        * Deployment of apps with Docker and Streamlit
+                    * Final project: Image search through sketch (Convolutional Neural Network with custom triplet loss function to suggest pictures similar to a user’s sketch)
+                    
+                    ''')
 
 
     with st.expander('Católica-Lisbon SBE - MSc in Economics'):
@@ -102,7 +116,7 @@ with edu_tab:
                     ''')
         
     
-    with st.expander('IST, University of Lisbon - MSc in Mechanical Engineering'):
+    with st.expander('IST, University of Lisbon - Bsc and MSc in Mechanical Engineering'):
 
         st.markdown(''':date: 09/2006 - 09/2012''')
         st.markdown(''':round_pushpin: Lisbon, Portugal''')
@@ -114,11 +128,36 @@ with edu_tab:
         
 
 with skill_tab:
-    st.header('These are my future plans:')
     st.markdown('''
-                skills
+                ### Technical skills
                 '''
                 )
+    
+    cols = st.columns([9, 1, 1, 1, 1, 1])
+    
+    cols[0].markdown('Data Analysis')
+    cols[1].markdown(':red_circle:')
+    cols[2].markdown(':red_circle:')
+    cols[3].markdown(':red_circle:')
+    cols[4].markdown(':red_circle:')
+    cols[5].markdown(':red_circle:')
+    
+    st.markdown('''
+                ### Software
+                '''
+                )
+    
+    cols = st.columns([9, 1, 1, 1, 1, 1])
+    
+    cols[0].write('Data Analysis')
+        
+    st.markdown('''
+            ### Python packages
+            '''
+            )
+    
+    
+    
 with cert_tab:
     st.header('These are my future plans:')
     st.markdown('''
