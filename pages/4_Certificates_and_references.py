@@ -11,20 +11,6 @@ st.set_page_config(
     initial_sidebar_state="auto",
     menu_items=None)
 
-def present_photos(category_directory_path, width = 300, col_num = 2):
-
-    images = [img for img in os.listdir(category_directory_path)]
-
-    cols = st.columns(col_num)
-
-    for i, image in enumerate(images):
-        image_path = f'{category_directory_path}/{image}'
-        with cols[i%col_num]:
-            st.image(image_path, image.split('.')[0], width = width)
-
-    return None
-
-
 
 base_path = f'bucket/'
 
@@ -37,12 +23,18 @@ with prof_tab:
 
     with st.expander('European Central Bank'):
         
-        st.image(f'{base_path}{subfolder}/Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3.pdf')
+        st.image(f'{base_path}{subfolder}/Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+
 
 
 with edu_tab:
     
     subfolder = 'academic_life'
+
+    with st.expander('European Central Bank'):
+        
+        st.image(f'{base_path}{subfolder}/Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3.pdf')
+
 
 
 with tech_skill_tab:
