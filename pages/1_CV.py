@@ -148,16 +148,16 @@ with skill_tab:
     
     # option with bars
     with cols[6]:
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots( figsize=(15, 15))
 
         ax.barh(1, 50, align='center')
         
         st.pyplot(fig)
         
-        st.markdown('''
-                    ### Software
-                    '''
-                    )
+    st.markdown('''
+                ### Software
+                '''
+                )
     
     cols = st.columns([9, 1, 1, 1, 1, 1])
     
