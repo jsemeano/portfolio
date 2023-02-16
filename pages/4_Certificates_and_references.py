@@ -3,6 +3,7 @@ import os
 # import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
 
 st.set_page_config(
     page_title='Certificates and references',
@@ -24,9 +25,9 @@ with prof_tab:
     with st.expander('European Central Bank'):
         
         # st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
-
+        img = Image.open('Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
         
-        st.image(f'Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+        st.image(img)
 
 
 
