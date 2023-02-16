@@ -36,7 +36,7 @@ with prof_tab:
         # response = requests.get(f'{base_url}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg{suffix}')
         # img = Image.open(BytesIO(response.content))
         
-        st.image(f'{base_url}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+        st.image(f'{base_url}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg', width=300)
 
 
 
