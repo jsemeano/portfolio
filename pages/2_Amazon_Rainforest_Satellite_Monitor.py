@@ -7,6 +7,7 @@ import numpy as np
 from pystac_client import Client
 from shapely import geometry 
 import rioxarray
+import requests
 
 
 st.set_page_config(
@@ -16,6 +17,11 @@ st.set_page_config(
     initial_sidebar_state="auto",
     menu_items=None)
 
+
+
+api_url = 'https://deforestation-2f7jkaqqnq-ew.a.run.app'
+prediction_url = api_url + '/classify'
+requests.get(api_url) #to activate container
 
 # def scale_values(values):
 #     # # Get the minimum and maximum values
@@ -190,6 +196,14 @@ with col8:
     if show_mosaic == 1:
         # st.write(mosaic_rgb)
         st.image(mosaic_rgb, clamp=True, channels='RGB')
+        
+        sketch_byte = mosaic_rgb.tobytes()
+        response_classes = requests.post(prediction_url, files={'sketch': sketch_byte}).json()
+
+        prediction = np.array(response_classes['prediction'])
+        
+        st.write(prediction)
+        
     elif show_mosaic == 0:
         st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
         
