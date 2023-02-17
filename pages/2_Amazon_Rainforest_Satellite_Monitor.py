@@ -200,9 +200,9 @@ with col8:
         sketch_byte = mosaic_rgb.tobytes()
         response_classes = requests.post(prediction_url, files={'sketch': sketch_byte}).json()
 
-        prediction = np.array(response_classes)
+        # prediction = np.array(response_classes)
         
-        st.write(prediction)
+        st.write(response_classes)
         
     elif show_mosaic == 0:
         st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
