@@ -200,7 +200,7 @@ with col8:
         sketch_byte = mosaic_rgb.tobytes()
         response_classes = requests.post(prediction_url, files={'sketch': sketch_byte}).json()
 
-        prediction = np.array(response_classes['prediction'])
+        prediction = np.array(response_classes)
         
         st.write(prediction)
         
