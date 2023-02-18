@@ -43,7 +43,7 @@ base_path = 'bucket/'
 
 with prof_tab:
     
-    subfolder = 'work_file/'
+    subfolder = 'work_life/'
 
     with st.expander('Freelance - Data Engineer'):
 
@@ -75,9 +75,9 @@ with prof_tab:
                     * Applying diverse time-series methods in debt and wage forecasting
                     ''')
         if st.checkbox('Certification', key = 'Certification ECB'):
-            subfolder = 'work_file/'
-            img = Image.open(f'{base_path}{subfolder}ECB.jpg')
-            st.image(img.resize((400,500)).rotate(-90))
+            # subfolder = 'work_file/'
+            # img = Image.open(f'{base_path}{subfolder}ECB.jpg')
+            st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
 
 
     with st.expander('Católica-Lisbon SBE - Faculty Assistant'):
