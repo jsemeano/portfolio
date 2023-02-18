@@ -46,9 +46,9 @@ with edu_tab:
     print(f'{base_path}{subfolder}catolica1.jpg')
 
     # with st.expander('European Central Bank'):
-        
+    img = Image.open(f'{base_path}{subfolder}catolica1.jpg')
     #     st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
-    st.image(f'{base_path}{subfolder}catolica1.jpg', 'catolica1')
+    st.image(img.rotate(90), 'catolica1')
     st.image(f'{base_path}{subfolder}catolica2.jpg', 'catolica1')
     st.image(f'{base_path}{subfolder}ist_bsc_1.jpg', 'catolica1')
     st.image(f'{base_path}{subfolder}ist_bsc_2.jpg', 'catolica1')
