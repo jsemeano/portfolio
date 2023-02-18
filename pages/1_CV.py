@@ -38,7 +38,7 @@ def bar_chart(skill_num):
     return fig
 
 
-
+base_path = 'bucket/'
 
 with prof_tab:
     
@@ -108,6 +108,8 @@ with prof_tab:
 
 with edu_tab:
 
+    subfolder = 'academic_life/'
+
     with st.expander('Le Wagon - Data Science Bootcamp'):
 
         st.markdown(''':date: 10/2022 - 12/2022''')
@@ -131,7 +133,7 @@ with edu_tab:
                     * Economic and statistical modelling
                     ''')
         
-        with st.expander('Certification'):
+        with st.checkbox('Certification'):
             st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').rotate(-90))
                 
