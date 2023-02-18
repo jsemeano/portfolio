@@ -47,6 +47,7 @@ with edu_tab:
     # with st.expander('European Central Bank'):
         
     #     st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
+    st.image(f'{base_url}{subfolder}catolica1.jpg', width=300, output_format='JPEG')
 
 
 
