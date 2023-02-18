@@ -48,10 +48,15 @@ with edu_tab:
     # with st.expander('European Central Bank'):
         
     #     st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
-    st.image(f'{base_path}{subfolder}image.jpg', 'catolica1')
-
-
-
+    st.image(f'{base_path}{subfolder}catolica1.jpg', 'catolica1')
+    st.image(f'{base_path}{subfolder}catolica2.jpg', 'catolica1')
+    st.image(f'{base_path}{subfolder}ist_bsc_1.jpg', 'catolica1')
+    st.image(f'{base_path}{subfolder}ist_bsc_2.jpg', 'catolica1')
+    st.image(f'{base_path}{subfolder}ist_bsc_3.jpg', 'catolica1')
+    st.image(f'{base_path}{subfolder}ist_msc_1.jpg', 'catolica1')
+    st.image(f'{base_path}{subfolder}ist_msc_2.jpg', 'catolica1')    
+    
+    
 with tech_skill_tab:
     
     subfolder = 'academic_life'
