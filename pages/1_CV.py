@@ -74,8 +74,8 @@ with prof_tab:
                     * Developing of internal dashboards to clearly present the developments in the public finances of EU member states
                     * Applying diverse time-series methods in debt and wage forecasting
                     ''')
-        # if st.checkbox('Certification'):
-        #     st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
+        if st.checkbox('Certification ECB'):
+            st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
 
 
     with st.expander('Católica-Lisbon SBE - Faculty Assistant'):
@@ -125,7 +125,7 @@ with edu_tab:
                     * Final project: Image search through sketch (Convolutional Neural Network with custom triplet loss function to suggest pictures similar to a user’s sketch)
                     
                     ''')
-        if st.checkbox('Certification'):
+        if st.checkbox('Certification LeWagon'):
             st.image(Image.open(f'{base_path}{subfolder}lewagon.jpg').resize((400,500)).rotate(-90))
         
 
@@ -138,7 +138,7 @@ with edu_tab:
                     * Economic and statistical modelling
                     ''')
         
-        if st.checkbox('Certification'):
+        if st.checkbox('Certification Católica'):
             st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').resize((400,500)).rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').resize((400,500)).rotate(-90))
                 
