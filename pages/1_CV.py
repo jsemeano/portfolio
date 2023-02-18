@@ -20,7 +20,8 @@ st.markdown('''
             ''')
 
 
-prof_tab, edu_tab, tech_skill_tab, soft_skill_tab = st.tabs(['Professional experience', 'Education', 'Technical skills', 'Soft skills'])
+prof_tab, edu_tab, tech_skill_tab, tech_cert_tab, soft_skill_tab, lang = st.tabs(['Professional experience', 'Education', 'Technical skills', 'Online technical certifications', 'Soft skills', 'Languages'])
+# prof_tab, edu_tab, tech_skill_tab, lang = st.tabs(['Professional experience', 'Education', 'Online technical certifications', 'Languages'])
 
 
 
@@ -147,8 +148,18 @@ with edu_tab:
                     * Intelligent systems and optimization
                     ''')
         
+        if st.checkbox('Certification MSc'):
+            st.image(Image.open(f'{base_path}{subfolder}ist_msc_1.jpg').rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}ist_msc_2.jpg').rotate(-90))
+                   
+        if st.checkbox('Certification BSc'):
+            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_1.jpg').rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_2.jpg').rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_3.jpg').rotate(-90))
+                   
         
-        
+
+
 
 with tech_skill_tab:
     st.markdown('''
@@ -349,6 +360,26 @@ with tech_skill_tab:
         st.pyplot(bar_chart(25))     
 
 
+
+with tech_cert_tab:
+    subfolder = 'academic_life/'
+    
+    col5, col6 = st.columns(2)
+    
+    with col5:
+    
+        st.markdown("[![Foo](https://new.inform-datalab.com/wp-content/uploads/snowflake-logo.png)](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)")
+    
+        st.markdown("[![Foo](https://awsmp-logos.s3.amazonaws.com/70b90c19-ed12-4fe9-a99e-28dcea832219/f36486226e4d0430922cb95a55a1edfb.png)](https://www.credential.net/ab3f6a44-df0e-46d1-a7ae-11f8c544f642)")
+    
+    
+    st.image(Image.open(f'{base_path}{subfolder}SQL_UC_DAVIS.JPG'))
+    st.image(Image.open(f'{base_path}{subfolder}scrum_methoddologies.JPG'))
+    st.image(Image.open(f'{base_path}{subfolder}scaling_agile.JPG'))
+    st.image(Image.open(f'{base_path}{subfolder}applied_machine_learning_michigan.JPG'))
+  
+    
+
 with soft_skill_tab:
  
     st.markdown('''
@@ -371,4 +402,9 @@ with soft_skill_tab:
             * Spanish (B2)
             '''
             )   
+
+with lang:
+    pass
+
+
 
