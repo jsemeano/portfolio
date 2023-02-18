@@ -395,6 +395,11 @@ with soft_skill_tab:
             )   
     
  
+ 
+
+with lang:
+    
+    subfolder= 'language/'
     st.markdown('''
             ### Languages
             
@@ -403,10 +408,8 @@ with soft_skill_tab:
             * German (B2)
             * Spanish (B2)
             '''
-            )   
-
-with lang:
-    pass
-
+            )  
+    
+    st.image(Image.open(f'{base_path}{subfolder}German language.jpg'))
 
 
