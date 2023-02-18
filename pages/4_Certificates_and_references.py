@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 import requests
 from io import BytesIO
+import urllib.request
 
 st.set_page_config(
     page_title='Certificates',
@@ -17,12 +18,7 @@ st.set_page_config(
 
 base_path = 'bucket/'
 
-base_url = 'https://github.com/jsemeano/portfolio/blob/main/bucket/'
-suffix = '?raw=true'
-
-
 prof_tab, edu_tab, tech_skill_tab, lang = st.tabs(['Professional experience', 'Education', 'Online technical certifications', 'Languages'])
-
 
 with prof_tab:
     
@@ -62,27 +58,44 @@ with edu_tab:
     
 with tech_skill_tab:
     
-    subfolder = 'academic_life'
+    subfolder = 'academic_life/'
     
     st.markdown("[![Foo](https://new.inform-datalab.com/wp-content/uploads/snowflake-logo.png)](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)")
+  
+    st.markdown("[![Foo](https://mma.prnewswire.com/media/1753282/dbt_labs_Logo.jpg?p=facebook)](https://www.credential.net/ab3f6a44-df0e-46d1-a7ae-11f8c544f642)")
     
-    st.markdown('''
+    
+    st.image(Image.open(f'{base_path}{subfolder}SQL_UC_DAVIS.jpg').rotate(-90))
+    st.image(Image.open(f'{base_path}{subfolder}scrum_methoddologies.jpg').rotate(-90))
+    st.image(Image.open(f'{base_path}{subfolder}scaling_agile.jpg').rotate(-90))
+    st.image(Image.open(f'{base_path}{subfolder}applied_machine_learning_michigan.jpg').rotate(-90))
+    # img.show()
+    
+    
+    # st.markdown("[![Foo](https://www.stickersdevs.com.br/wp-content/uploads/2022/01/postgresql-adesivo-sticker.png)](https://www.coursera.org/account/accomplishments/certificate/98G4DCYDUSTM)")
+  
+    # st.markdown("[![Foo](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png)](https://www.coursera.org/account/accomplishments/certificate/DNYVPE9B4XJD)")
+  
+  
+  
+    
+    # st.markdown('''
                 
-        st.markdown("[![Foo](http://www.google.com.au/images/nav_logo7.png)](http://google.com.au/)")
+    #     st.markdown("[![Foo](http://www.google.com.au/images/nav_logo7.png)](http://google.com.au/)")
         
-        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+    #     [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
         
-        [dbt](https://www.credential.net/ab3f6a44-df0e-46d1-a7ae-11f8c544f642)
+    #     [dbt](https://www.credential.net/ab3f6a44-df0e-46d1-a7ae-11f8c544f642)
         
-        [SQL for Data Science](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+    #     [SQL for Data Science](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
         
-        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+    #     [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
         
-        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+    #     [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
         
-        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+    #     [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
         
-    ''')
+    # ''')
 
 
 with lang:
