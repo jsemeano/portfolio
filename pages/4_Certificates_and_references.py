@@ -60,12 +60,16 @@ with tech_skill_tab:
     
     subfolder = 'academic_life/'
     
-    st.markdown("[![Foo](https://new.inform-datalab.com/wp-content/uploads/snowflake-logo.png)](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)")
-  
-    st.markdown("[![Foo](https://mma.prnewswire.com/media/1753282/dbt_labs_Logo.jpg?p=facebook)](https://www.credential.net/ab3f6a44-df0e-46d1-a7ae-11f8c544f642)")
+    col5, col6 = st.columns(2)
+    
+    with col5:
+    
+        st.markdown("[![Foo](https://new.inform-datalab.com/wp-content/uploads/snowflake-logo.png)](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)")
+    
+        st.markdown("[![Foo](https://mma.prnewswire.com/media/1753282/dbt_labs_Logo.jpg?p=facebook)](https://www.credential.net/ab3f6a44-df0e-46d1-a7ae-11f8c544f642)")
     
     
-    st.image(Image.open(f'{base_path}{subfolder}SQL_UC_DAVIS.jpg').rotate(-90))
+    st.image(Image.open(f'{base_path}{subfolder}SQL_UC_DAVIS.JPG').rotate(-90))
     st.image(Image.open(f'{base_path}{subfolder}scrum_methoddologies.jpg').rotate(-90))
     st.image(Image.open(f'{base_path}{subfolder}scaling_agile.jpg').rotate(-90))
     st.image(Image.open(f'{base_path}{subfolder}applied_machine_learning_michigan.jpg').rotate(-90))
