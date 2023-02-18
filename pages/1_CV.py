@@ -133,7 +133,7 @@ with edu_tab:
                     * Economic and statistical modelling
                     ''')
         
-        with st.checkbox('Certification'):
+        if st.checkbox('Certification'):
             st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').rotate(-90))
                 
