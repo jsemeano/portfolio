@@ -42,7 +42,7 @@ with prof_tab:
 
 with edu_tab:
     
-    subfolder = 'academic_life'
+    subfolder = 'academic_life/'
     print(f'{base_path}{subfolder}catolica1.jpg')
 
     # with st.expander('European Central Bank'):
