@@ -43,7 +43,7 @@ base_path = 'bucket/'
 
 with prof_tab:
     
-
+    subfolder = 'work_file/'
 
     with st.expander('Freelance - Data Engineer'):
 
@@ -74,6 +74,8 @@ with prof_tab:
                     * Developing of internal dashboards to clearly present the developments in the public finances of EU member states
                     * Applying diverse time-series methods in debt and wage forecasting
                     ''')
+        if st.checkbox('Certification'):
+            st.image(Image.open(f'{base_path}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3_page-0001.jpg').resize((400,500)).rotate(-90))
 
 
     with st.expander('Católica-Lisbon SBE - Faculty Assistant'):
@@ -123,6 +125,8 @@ with edu_tab:
                     * Final project: Image search through sketch (Convolutional Neural Network with custom triplet loss function to suggest pictures similar to a user’s sketch)
                     
                     ''')
+        if st.checkbox('Certification'):
+            st.image(Image.open(f'{base_path}{subfolder}lewagon.jpg').resize((400,500)).rotate(-90))
         
 
 
@@ -135,7 +139,6 @@ with edu_tab:
                     ''')
         
         if st.checkbox('Certification'):
-            # st.markdown("[![Foo](https://github.com/jsemeano/portfolio/blob/main/bucket/academic_life/catolica1.jpg)](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)")
             st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').resize((400,500)).rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').resize((400,500)).rotate(-90))
                 
