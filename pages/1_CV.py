@@ -77,7 +77,7 @@ with prof_tab:
         if st.checkbox('Certification', key = 'Certification ECB'):
             # subfolder = 'work_file/'
             # img = Image.open(f'{base_path}{subfolder}ECB.jpg')
-            st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)))
 
 
     with st.expander('Católica-Lisbon SBE - Faculty Assistant'):
