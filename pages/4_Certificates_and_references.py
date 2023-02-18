@@ -36,19 +36,19 @@ with prof_tab:
         # response = requests.get(f'{base_url}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg{suffix}')
         # img = Image.open(BytesIO(response.content))
         
-        st.image(f'{base_url}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg', width=300, output_format='JPEG')
+        st.image(f'{base_path}{subfolder}Domingues_Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg', width=300, output_format='JPEG')
 
 
 
 with edu_tab:
     
     subfolder = 'academic_life'
-    print(f'{base_url}{subfolder}catolica1.jpg')
+    print(f'{base_path}{subfolder}catolica1.jpg')
 
     # with st.expander('European Central Bank'):
         
     #     st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
-    st.image(f'{base_url}{subfolder}catolica1.jpg', 'catolica1', width=300, output_format='JPEG')
+    st.image(f'{base_path}{subfolder}catolica1.jpg', 'catolica1', width=300, output_format='JPEG')
 
 
 
