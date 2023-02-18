@@ -137,7 +137,7 @@ with edu_tab:
         if st.checkbox('Certification'):
             # st.markdown("[![Foo](https://github.com/jsemeano/portfolio/blob/main/bucket/academic_life/catolica1.jpg)](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)")
             st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').resize((400,500)).rotate(-90))
-            st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').rotate(-90).resize((400,400)))
+            st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').resize((400,500)).rotate(-90))
                 
         
     
@@ -150,13 +150,13 @@ with edu_tab:
                     ''')
         
         if st.checkbox('Certification MSc'):
-            st.image(Image.open(f'{base_path}{subfolder}ist_msc_1.jpg').rotate(-90).resize((400,400)))
-            st.image(Image.open(f'{base_path}{subfolder}ist_msc_2.jpg').rotate(-90).resize((400,400)))
+            st.image(Image.open(f'{base_path}{subfolder}ist_msc_1.jpg').resize((400,500)).rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}ist_msc_2.jpg').resize((400,500)).rotate(-90))
                    
         if st.checkbox('Certification BSc'):
-            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_1.jpg').rotate(-90).resize((400,400)))
-            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_2.jpg').rotate(-90).resize((400,400)))
-            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_3.jpg').rotate(-90).resize((400,400)))
+            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_1.jpg').resize((400,500)).rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_2.jpg').resize((400,500)).rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}ist_bsc_3.jpg').resize((400,500)).rotate(-90))
                    
         
 
