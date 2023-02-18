@@ -39,7 +39,7 @@ st.markdown('''
             1. My CV with professional experience, education and certifications
             2. Sketch 2 Image: an app that searches for images similar to your sketch
             3. Amazon Rainforest Satellite Monitor: an app built for an NGO to give early warning of deforestation activities in the Amazon
-            4. Certificates and references
+
             ''')
 
 # with open("other/resume.pdf", "rb") as pdf_file:
