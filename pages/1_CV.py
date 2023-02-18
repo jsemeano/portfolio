@@ -74,8 +74,8 @@ with prof_tab:
                     * Developing of internal dashboards to clearly present the developments in the public finances of EU member states
                     * Applying diverse time-series methods in debt and wage forecasting
                     ''')
-        if st.checkbox('Certification'):
-            st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
+        # if st.checkbox('Certification'):
+        #     st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
 
 
     with st.expander('Católica-Lisbon SBE - Faculty Assistant'):
