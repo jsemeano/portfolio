@@ -4,6 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
+from PIL import Image
+
 st.set_page_config(
     page_title='Joao Semeano CV',
     page_icon=':palm_tree:',
@@ -118,6 +120,7 @@ with edu_tab:
                     * Final project: Image search through sketch (Convolutional Neural Network with custom triplet loss function to suggest pictures similar to a user’s sketch)
                     
                     ''')
+        
 
 
     with st.expander('Católica-Lisbon SBE - MSc in Economics'):
@@ -127,6 +130,11 @@ with edu_tab:
         st.markdown('''
                     * Economic and statistical modelling
                     ''')
+        
+        with st.expander('Certification'):
+            st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').rotate(-90))
+            st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').rotate(-90))
+                
         
     
     with st.expander('IST, University of Lisbon - Bsc and MSc in Mechanical Engineering'):
