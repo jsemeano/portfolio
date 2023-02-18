@@ -1,9 +1,5 @@
 import streamlit as st
-import os
-# import plotly.graph_objects as go
 import matplotlib.pyplot as plt
-import numpy as np
-
 from PIL import Image
 
 st.set_page_config(
