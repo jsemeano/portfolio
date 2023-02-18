@@ -74,7 +74,7 @@ with prof_tab:
                     * Developing of internal dashboards to clearly present the developments in the public finances of EU member states
                     * Applying diverse time-series methods in debt and wage forecasting
                     ''')
-        if st.checkbox('Certification ECB'):
+        if st.checkbox('Certification', key = 'Certification ECB'):
             st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
 
 
@@ -125,8 +125,8 @@ with edu_tab:
                     * Final project: Image search through sketch (Convolutional Neural Network with custom triplet loss function to suggest pictures similar to a user’s sketch)
                     
                     ''')
-        if st.checkbox('Certification LeWagon'):
-            st.image(Image.open(f'{base_path}{subfolder}lewagon.jpg').resize((400,500)).rotate(-90))
+        if st.checkbox('Certification', key = 'Certification LeWagon'):
+            st.image(Image.open(f'{base_path}{subfolder}lewagon.jpg').resize((400,500)))
         
 
 
@@ -138,7 +138,7 @@ with edu_tab:
                     * Economic and statistical modelling
                     ''')
         
-        if st.checkbox('Certification Católica'):
+        if st.checkbox('Certification', key = 'Certification Católica'):
             st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').resize((400,500)).rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').resize((400,500)).rotate(-90))
                 
@@ -152,11 +152,11 @@ with edu_tab:
                     * Intelligent systems and optimization
                     ''')
         
-        if st.checkbox('Certification MSc'):
+        if st.checkbox('Certification', key = 'Certification MSc'):
             st.image(Image.open(f'{base_path}{subfolder}ist_msc_1.jpg').resize((400,500)).rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}ist_msc_2.jpg').resize((400,500)).rotate(-90))
                    
-        if st.checkbox('Certification BSc'):
+        if st.checkbox('Certification', key = 'Certification BSc'):
             st.image(Image.open(f'{base_path}{subfolder}ist_bsc_1.jpg').resize((400,500)).rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}ist_bsc_2.jpg').resize((400,500)).rotate(-90))
             st.image(Image.open(f'{base_path}{subfolder}ist_bsc_3.jpg').resize((400,500)).rotate(-90))
