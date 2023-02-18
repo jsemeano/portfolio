@@ -8,7 +8,7 @@ import requests
 from io import BytesIO
 
 st.set_page_config(
-    page_title='Certificates and references',
+    page_title='Certificates',
     page_icon=':palm_tree:',
     layout="wide",
     initial_sidebar_state="auto",
@@ -43,23 +43,46 @@ with prof_tab:
 with edu_tab:
     
     subfolder = 'academic_life/'
-    print(f'{base_path}{subfolder}catolica1.jpg')
-
-    # with st.expander('European Central Bank'):
-    img = Image.open(f'{base_path}{subfolder}catolica1.jpg')
-    #     st.image(f'{base_path}{subfolder}Domingues Semeano_HR_EMPLOYMENT_LETTER_EN_V3-0001.jpg')
-    st.image(img.rotate(-90), 'catolica1')
-    st.image(f'{base_path}{subfolder}catolica2.jpg', 'catolica1')
-    st.image(f'{base_path}{subfolder}ist_bsc_1.jpg', 'catolica1')
-    st.image(f'{base_path}{subfolder}ist_bsc_2.jpg', 'catolica1')
-    st.image(f'{base_path}{subfolder}ist_bsc_3.jpg', 'catolica1')
-    st.image(f'{base_path}{subfolder}ist_msc_1.jpg', 'catolica1')
-    st.image(f'{base_path}{subfolder}ist_msc_2.jpg', 'catolica1')    
     
+    
+    with st.expander('MSc in Economics - Católica-Lisbon SBE'):
+        st.image(Image.open(f'{base_path}{subfolder}catolica1.jpg').rotate(-90))
+        st.image(Image.open(f'{base_path}{subfolder}catolica2.jpg').rotate(-90))
+    
+
+    with st.expander('MSc in Mechanical Engineering - Instituto Superior Técnico/Universidade de Lisboa'): 
+        st.image(Image.open(f'{base_path}{subfolder}ist_msc_1.jpg').rotate(-90))
+        st.image(Image.open(f'{base_path}{subfolder}ist_msc_2.jpg').rotate(-90))
+
+    with st.expander('BSc in Mechanical Engineering - Instituto Superior Técnico/Universidade de Lisboa'): 
+        st.image(Image.open(f'{base_path}{subfolder}ist_bsc_1.jpg').rotate(-90))
+        st.image(Image.open(f'{base_path}{subfolder}ist_bsc_2.jpg').rotate(-90))
+        st.image(Image.open(f'{base_path}{subfolder}ist_bsc_3.jpg').rotate(-90))
+   
     
 with tech_skill_tab:
     
     subfolder = 'academic_life'
+    
+    st.markdown("[![Foo](https://new.inform-datalab.com/wp-content/uploads/snowflake-logo.png)](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)")
+    
+    st.markdown('''
+                
+        st.markdown("[![Foo](http://www.google.com.au/images/nav_logo7.png)](http://google.com.au/)")
+        
+        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+        
+        [dbt](https://www.credential.net/ab3f6a44-df0e-46d1-a7ae-11f8c544f642)
+        
+        [SQL for Data Science](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+        
+        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+        
+        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+        
+        [Snowflake : Hands On Essentials - Data Warehouse](https://www.credly.com/badges/36c8d90d-894d-4006-80db-d9546b08c224/linked_in_profile)
+        
+    ''')
 
 
 with lang:
