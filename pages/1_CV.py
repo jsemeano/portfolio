@@ -127,7 +127,7 @@ with edu_tab:
                     
                     ''')
         if st.checkbox('Certification', key = 'Certification LeWagon'):
-            st.image(Image.open(f'{base_path}{subfolder}lewagon.jpg').resize((400,500)))
+            st.image(Image.open(f'{base_path}{subfolder}lewagon.jpg').resize((400,500)).rotate(-180))
         
 
 
