@@ -75,6 +75,7 @@ with prof_tab:
                     * Applying diverse time-series methods in debt and wage forecasting
                     ''')
         if st.checkbox('Certification', key = 'Certification ECB'):
+            subfolder = 'work_file/'
             st.image(Image.open(f'{base_path}{subfolder}ECB.jpg').resize((400,500)).rotate(-90))
 
 
