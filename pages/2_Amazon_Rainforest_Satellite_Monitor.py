@@ -24,6 +24,8 @@ api_url = 'https://deforestation-2f7jkaqqnq-ew.a.run.app'
 # api_url = 'http://localhost:80'
 prediction_url = api_url + '/classify'
 requests.get(api_url) #to activate container
+st.header('Amazon rainforest deforestation monitor')
+st.markdown("""## In this page you can pick a point in the peruvian amazon jungle and get a satellite picture of that area :palm_tree:""")
 
 
 def scale_values(values):

@@ -71,7 +71,7 @@ research_repo = 'https://github.com/CDOTAD/SketchyDatabase'
 
 df = None
 
-st.header('Le Wagon Final Project: Sketch to Image Transformer')
+st.header('Sketch to Image Transformer')
 
 with st.expander('Sketch to Image Transformer UI'):
     st.markdown("""## Let's transform your sketches with our AI! :cat:""")
