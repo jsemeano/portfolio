@@ -1,0 +1,9 @@
+pytest
+pylint
+ipdb
+numpy
+pandas
+fastapi
+docker
+uvicorn
+python-multipart
