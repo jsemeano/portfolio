@@ -3,3 +3,5 @@ shapely==2.0.1
 pystac-client==0.6.
 rioxarray==0.13.3
 matplotlib==3.6.2
+streamlit_drawable_canvas
+opencv-python-headless

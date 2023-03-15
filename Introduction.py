@@ -37,8 +37,8 @@ st.markdown('''
             
             In this page you find:
             1. My CV with professional experience, education and certifications
-            2. Sketch 2 Image: an app that searches for images similar to your sketch
-            3. Amazon Rainforest Satellite Monitor: an app built for an NGO to give early warning of deforestation activities in the Amazon
+            2. Amazon Rainforest Satellite Monitor: an app built for an NGO to give early warning of deforestation activities in the Amazon
+            3. Sketch 2 Image: an app that searches for images similar to your sketch
 
             ''')
 
