@@ -423,7 +423,7 @@ with model_tab:
         This is how it looks:
         ''')
 
-        st.image(loss_function_url)
+        # st.image(loss_function_url)
 
     with st.expander('Model Architecture'):
         st.markdown('''
@@ -433,7 +433,7 @@ with model_tab:
         - These modified models were then put in siamese triplet network, and the siamese layers then were trained with the loss function described avbove.
         - The other one was a siamese network with the loss function described above (code name "Silvi"). That model projects the sketch into a sketch-photo feature space, that looks like this:
         ''')
-        st.image(feature_space_url, '', 400)
+        # st.image(feature_space_url, '', 400)
         st.markdown('''
         - After that, the closest images to the sketch in the feature space are being sent to the UI, that presents them to the user.
         ''')
