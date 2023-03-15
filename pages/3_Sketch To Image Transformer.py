@@ -381,10 +381,6 @@ with st.expander("Sketch Duels UI"):
                 else:
                     st.markdown('## Player 2 pays for the drinks! :tada:')
                 st.balloons()
-        audio_file = open('other/dramatic.mp3', 'rb')
-        audio_bytes = audio_file.read()
-
-        st.audio(audio_bytes, format='audio/ogg', start_time = 2)
 
 intro_tab, model_tab, future_tab = st.tabs(['Introduction', 'Model and Production', 'Future']) #Add The team tab
 
