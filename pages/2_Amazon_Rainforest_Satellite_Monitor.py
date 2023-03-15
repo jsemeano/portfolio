@@ -219,22 +219,22 @@ with col8:
         st.write(f'total time to get the chip : {((time.time()-start)/60):.3f}')
         st.image(mosaic_rgb, clamp=True, channels='RGB')
         
-        start = time.time()
+        # start = time.time()
         
-        print(f'mosaic_rgb shape : {mosaic_rgb.shape}')
+        # print(f'mosaic_rgb shape : {mosaic_rgb.shape}')
 
-        mosaic_rgb = mosaic_rgb.astype(np.float32)
-        sketch_byte = mosaic_rgb.tobytes()
+        # mosaic_rgb = mosaic_rgb.astype(np.float32)
+        # sketch_byte = mosaic_rgb.tobytes()
         
-        resp = requests.post(prediction_url,files={'sketch': sketch_byte}) #  json=sketch_byte)# 
-        response_classes = resp.json()
-        st.write(resp)
+        # resp = requests.post(prediction_url,files={'sketch': sketch_byte}) #  json=sketch_byte)# 
+        # response_classes = resp.json()
+        # st.write(resp)
 
-        prediction = list(response_classes)
+        # prediction = list(response_classes)
         
-        st.write(response_classes)
+        # st.write(response_classes)
         
-        st.write(f'running model : {time.time()-start}')
+        # st.write(f'running model : {time.time()-start}')
         
     elif show_mosaic == 0:
         st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
