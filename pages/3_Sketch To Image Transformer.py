@@ -443,7 +443,7 @@ with model_tab:
         - All of the photos and sketches were held in a google bucket and were pulled from there for training.
         - After the training was ended, only the photos remained in the bucket, in order to be pulled and presented.
         - An API was built using FastAPI:
-            1. It recieves the sketch of the user and preprocess it.
+            1. It receives the sketch of the user and preprocess it.
             2. Then, it classifies it using the classification model.
             3. After that, it takes the label and projects the sketch into the common feature space, using the second model.
             4. The names of the closest images to the sketch are being sent back, with labels-probas json.
@@ -455,12 +455,14 @@ with future_tab:
     st.markdown('''
                 ### Possible improvements to this page will be:
                 * Finish the training of the model and complete the feature space for every category
-                * Make the code more robust and maintainable, by:
-                   * Holding the copy writing in variables and change it only once
-                   * Defining the control flow better
-                   * Building a professional UI
+
                 * Possible use cases:
                    * Integrate commercials and deploy it as a game
                    * After full training, transforming it to a full interface of sketch-to-image
                    * Draw training
                 ''')
+    
+                #     * Make the code more robust and maintainable, by:
+                #    * Holding the copy writing in variables and change it only once
+                #    * Defining the control flow better
+                #    * Building a professional UI
