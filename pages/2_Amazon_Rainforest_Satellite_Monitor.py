@@ -8,6 +8,7 @@ from pystac_client import Client
 from shapely import geometry 
 import rioxarray
 import requests
+import json
 
 
 st.set_page_config(
@@ -20,41 +21,29 @@ st.set_page_config(
 
 
 api_url = 'https://deforestation-2f7jkaqqnq-ew.a.run.app'
-api_url = 'http://localhost:80'
+# api_url = 'http://localhost:80'
 prediction_url = api_url + '/classify'
 requests.get(api_url) #to activate container
 
-# def scale_values(values):
-#     # # Get the minimum and maximum values
-#     max_value_allowed = 5000
-#     # min_value = np.min(values)
-#     # max_value = np.max(values)
-#     # # Calculate the range of the values
-#     # value_range = max_value - min_value
-#     if max_value_allowed-np.min(values) == 0:
-#         print(np.max(values)-np.min(values))
-#         return None
-    
-#     # Scale the values to a range of 0 to 1
-#     scaled_values = np.rint(255*((values - np.min(values)) / (np.max(values)-np.min(values))))
-#     scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
-    
-#     return  scaled_values 
-#     # return  (min_value, max_value, value_range) # scaled_values_int 
 
 def scale_values(values):
     # Get the minimum and maximum values
     
-    min_value = np.min(values)
-    max_value = np.max(values)
-    if max_value > 5000:
-        max_value = 5000
+    # min_value = np.min(values)
+    # max_value = np.max(values)
+    
+    min_value = 10
+    max_value = 1000
+    
+    # if max_value > 5000:
+    #     max_value = 5000
     
     # Calculate the range of the values
     value_range = max_value - min_value
     # Scale the values to a range of 0 to 1
     scaled_values = np.array([255*((value - min_value) / value_range) for value in values]).astype(int)
     scaled_values = np.where(scaled_values >= 255, 255, scaled_values)
+    scaled_values = np.where(scaled_values < 0, 0, scaled_values)
 
     return  scaled_values
 
@@ -77,10 +66,6 @@ def chiping_list(mosaic_shape,dist,overlap):
     return chip_df
 
 def chipping(mosaic,chip_coord):
-    
-    # chip_df['rgb'] = chip_df.apply(lambda x: mosaic[x['x_top_left']:x['x_bottom_right'],x['y_top_left']:x['y_bottom_right'],:]  , axis=1)
-   
-    
     return mosaic[chip_coord['x_top_left']:chip_coord['x_bottom_right'],chip_coord['y_top_left']:chip_coord['y_bottom_right']]
 
 def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
@@ -91,7 +76,6 @@ def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
         max_items=max_items,
         datetime=f"{start_date}/{end_date}",
         query=[f"eo:cloud_cover<{cloud_cover}"]
-        # resolution  =10
     )
 
     # create dataframe with main metadata and thumbnails
@@ -152,19 +136,21 @@ def aws_sentinel_chip(item,area):
 
     print(f'3rd chip : {time.time()-start}')
     
+    
+    print(f'red -> max {np.max(mosaic_red)}; min {np.min(mosaic_red)}\ngreen -> max {np.max(mosaic_green)}; min {np.min(mosaic_green)}\nblue -> max {np.max(mosaic_blue)}; min {np.min(mosaic_blue)}')
+    
+    
     if scale_option == 1:
         
         start = time.time()
-        
+        print(chip_red)
         chip_red = scale_values(chip_red)
+        print(chip_red)
         chip_green = scale_values(chip_green)
         chip_blue = scale_values(chip_blue)
         
         print(f'scaling : {time.time()-start}')
 
-    # chip_green = chipping(mosaic_green,chip_list_df.iloc[ind_item])
-    # chip_blue = chipping(mosaic_blue,chip_list_df.iloc[ind_item])
-    
     start = time.time()
     mosaic_rgb = np.stack([chip_red, 
                            chip_green, 
@@ -172,23 +158,7 @@ def aws_sentinel_chip(item,area):
                           axis=2)
   
     print(f'stacking chip : {start-time.time()}')
-    
-    # print(f'red : max - {np.max(mosaic_red)} , min - {np.min(mosaic_red)} ')
-    # print(f'green : max - {np.max(mosaic_green)} , min - {np.min(mosaic_green)} ')
-    # print(f'blue : max - {np.max(mosaic_blue)} , min - {np.min(mosaic_blue)} ')
-    
-    # del mosaic_blue
-    # del mosaic_green
-    # del mosaic_red
-   
 
-    # mosaic_rgb = mosaic_rgb.iloc[int(ind_item)]['rgb']
-
-    
-    # for i in range(3):
-    #     print(i)
-    #     mosaic_rgb[:,:,i] = scale_values(mosaic_rgb[:,:,i])
-    
     return   mosaic_rgb
 
 
@@ -251,12 +221,18 @@ with col8:
         
         start = time.time()
         
-        sketch_byte = mosaic_rgb.tobytes()
-        response_classes = requests.post(prediction_url, files={'sketch': sketch_byte}).json()
+        print(f'mosaic_rgb shape : {mosaic_rgb.shape}')
 
-        prediction = np.array(response_classes)
+        mosaic_rgb = mosaic_rgb.astype(np.float32)
+        sketch_byte = mosaic_rgb.tobytes()
         
-        st.write(prediction)
+        resp = requests.post(prediction_url,files={'sketch': sketch_byte}) #  json=sketch_byte)# 
+        response_classes = resp.json()
+        st.write(resp)
+
+        prediction = list(response_classes)
+        
+        st.write(response_classes)
         
         st.write(f'running model : {time.time()-start}')
         
