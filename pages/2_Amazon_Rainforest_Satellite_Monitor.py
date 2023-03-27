@@ -103,8 +103,8 @@ def chiping_list(mosaic_shape,mosaic_geom,dist,overlap):
     
     return chip_df
 
-def chipping(mosaic,chip_coord):
-    return mosaic[chip_coord['x_top_left']:chip_coord['x_bottom_right'],chip_coord['y_top_left']:chip_coord['y_bottom_right']]
+# def chipping(mosaic,chip_coord):
+#     return mosaic[chip_coord['x_top_left']:chip_coord['x_bottom_right'],chip_coord['y_top_left']:chip_coord['y_bottom_right']]
 
 def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
     
