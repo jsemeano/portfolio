@@ -139,7 +139,7 @@ def download_mosaic_rgb(item):
 
 def aws_sentinel_chip(item,area,scale_option = 0):
     
-    [lat,lon] = area 
+    [lon,lat] = area 
     
 #     zone['x'], zone['y'], zone['zone'], zone['zone_sec']
 #     ind_item = pick_chip(item.geometry['coordinates'][0])
