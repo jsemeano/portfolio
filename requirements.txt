@@ -6,3 +6,4 @@ matplotlib==3.6.2
 streamlit_drawable_canvas
 opencv-python-headless
 google-cloud-storage
+utm==0.7.0

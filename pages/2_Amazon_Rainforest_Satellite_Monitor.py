@@ -9,6 +9,7 @@ from shapely import geometry
 import rioxarray
 import requests
 import json
+import utm
 
 
 st.set_page_config(
@@ -49,7 +50,16 @@ def scale_values(values):
 
     return  scaled_values
 
-def chiping_list(mosaic_shape,dist,overlap):
+
+def chipping(mosaic,chip_coord):
+#     print(chip_coord)
+    
+    return mosaic[
+        int(chip_coord['x_top_left_px']):int(chip_coord['x_bottom_right_px']),
+        int(chip_coord['y_top_left_px']):int(chip_coord['y_bottom_right_px'])
+    ]
+
+def chiping_list(mosaic_shape,mosaic_geom,dist,overlap):
     
     # calculate longitudes of top left corner    
     vec_x = int((1-overlap)*dist)*np.arange(0,int(mosaic_shape[1]//int((1-overlap)*dist)),1)
@@ -60,10 +70,36 @@ def chiping_list(mosaic_shape,dist,overlap):
     vec_y[-1] = mosaic_shape[2]-dist
 
     # create the data frame with longitude and latitude of both corners of the chip
-    chip_df = pd.DataFrame(data=np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2), columns=['x_top_left', 'y_top_left'])
+    chip_df = pd.DataFrame(data=np.array(np.meshgrid(vec_x,vec_y)).T.reshape(len(vec_x)*len(vec_y),2), 
+                           columns=['x_top_left_px', 'y_top_left_px'])
 
-    chip_df['x_bottom_right'] = chip_df.apply(lambda x: x['x_top_left']+dist , axis=1)
-    chip_df['y_bottom_right'] = chip_df.apply(lambda x: x['y_top_left']+dist , axis=1)
+    chip_df['x_bottom_right_px'] = chip_df.apply(lambda x: x['x_top_left_px']+dist , axis=1)
+    chip_df['y_bottom_right_px'] = chip_df.apply(lambda x: x['y_top_left_px']+dist , axis=1)
+    
+    max_lon = max([item[0] for item in mosaic_geom])
+    min_lon = min([item[0] for item in mosaic_geom])
+    
+    max_lat = max([item[1] for item in mosaic_geom])
+    min_lat = min([item[1] for item in mosaic_geom])
+    
+    x_top_left_utm, y_top_left_utm, zone_top_left, zone_sec_top_left = utm.from_latlon(max_lat, min_lon)
+    x_bottom_right_utm, y_bottom_right_utm, zone_top_left, zone_sec_top_left = utm.from_latlon(min_lat, max_lon)
+    
+    
+    chip_df['x_top_left_utm'] = chip_df.apply(lambda x: x['x_top_left_px']*10 +  x_top_left_utm, axis=1)
+    chip_df['y_top_left_utm'] = chip_df.apply(lambda x: - x['y_top_left_px']*10 +  y_top_left_utm, axis=1)
+    
+    chip_df['x_bottom_right_utm'] = chip_df.apply(lambda x: x['x_bottom_right_px']*10 +  x_top_left_utm, axis=1)
+    chip_df['y_bottom_right_utm'] = chip_df.apply(lambda x: - x['y_bottom_right_px']*10 +  y_top_left_utm, axis=1)
+ 
+        
+    y_top_left_gps, x_top_left_gps = utm.to_latlon(chip_df['x_top_left_utm'], chip_df['y_top_left_utm'],18, 'L')
+    y_bottom_right_gps, x_bottom_right_gps = utm.to_latlon(chip_df['x_bottom_right_utm'], chip_df['y_bottom_right_utm'], 18, 'L')
+   
+    chip_df['x_top_left_gps'] = x_top_left_gps
+    chip_df['y_top_left_gps'] = y_top_left_gps
+    chip_df['x_bottom_right_gps'] = x_bottom_right_gps
+    chip_df['y_bottom_right_gps'] = y_bottom_right_gps
     
     return chip_df
 
@@ -93,74 +129,67 @@ def aws_sentinel_retrieve_item(max_items, cloud_cover,start_date,end_date,area):
 
     return item
 
-def aws_sentinel_chip(item,area):
+def download_mosaic_rgb(item):
     
-    scale_option = 1
-    
-    geom = item.geometry['coordinates'][0]
-    
-    lon_geom = [i[0] for i in geom]
-    lat_geom = [i[1] for i in geom]
-
-    max_lon = max(lon_geom)
-    min_lon = min(lon_geom)
-    max_lat = max(lat_geom)
-    min_lat = min(lat_geom)
-    
-    ind_item = int((-min_lon+area[0])//((-min_lon+max_lon)/61)*61 + (-min_lat+area[1])//((-min_lat+max_lat)/61))
-    
-    # Merge each colour band independently and group them into a RGB array
-
-    start = time.time()
-
     mosaic_red = rioxarray.open_rasterio(item.assets["B04"].href).values
-    
-    chip_list_df = chiping_list(mosaic_red.shape,256,0.3)
-
-    
-    chip_red = chipping(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])),chip_list_df.iloc[ind_item])
-    
-    print(f'1st chip : {time.time()-start}')
-    
-    start = time.time()
-    
     mosaic_green = rioxarray.open_rasterio(item.assets["B03"].href).values
-
-    chip_green = chipping(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])),chip_list_df.iloc[ind_item])
-
-    print(f'2nd chip : {time.time()-start}')
-    
-    start = time.time()
-
     mosaic_blue = rioxarray.open_rasterio(item.assets["B02"].href).values
     
-    chip_blue = chipping(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])),chip_list_df.iloc[ind_item])
+    return mosaic_red, mosaic_green, mosaic_blue
 
-    print(f'3rd chip : {time.time()-start}')
+def aws_sentinel_chip(item,area,scale_option = 0):
     
+    [lat,lon] = area 
     
-    print(f'red -> max {np.max(mosaic_red)}; min {np.min(mosaic_red)}\ngreen -> max {np.max(mosaic_green)}; min {np.min(mosaic_green)}\nblue -> max {np.max(mosaic_blue)}; min {np.min(mosaic_blue)}')
+#     zone['x'], zone['y'], zone['zone'], zone['zone_sec']
+#     ind_item = pick_chip(item.geometry['coordinates'][0])
     
-    
-    if scale_option == 1:
-        
-        start = time.time()
-        print(chip_red)
-        chip_red = scale_values(chip_red)
-        print(chip_red)
-        chip_green = scale_values(chip_green)
-        chip_blue = scale_values(chip_blue)
-        
-        print(f'scaling : {time.time()-start}')
+    # Merge each colour band independently and group them into a RGB array
+    print(f"date : {item.datetime.strftime('%d/%m/%Y').replace('/','-')}")
 
     start = time.time()
-    mosaic_rgb = np.stack([chip_red, 
-                           chip_green, 
-                           chip_blue], 
-                          axis=2)
-  
-    print(f'stacking chip : {start-time.time()}')
+    
+    mosaic_red, mosaic_green, mosaic_blue = download_mosaic_rgb(item)
+    
+    print(f'download pics : {time.time()-start}')
+    
+    start = time.time()
+    
+    chip_list_df = chiping_list(mosaic_red.shape,item.geometry['coordinates'][0],86,0)
+    
+    print(f'size of chip_list : {chip_list_df.shape}')
+    
+    print(f'chipping list : {time.time()-start}')
+    
+    
+    
+    chip_list_zone_df  =   chip_list_df[(chip_list_df['x_top_left_gps'] <= lon) 
+             & (lon <= chip_list_df['x_bottom_right_gps'])
+             & (chip_list_df['y_top_left_gps'] >= lat) 
+             & (lat >= chip_list_df['y_bottom_right_gps'])]
+    
+    for i, chip in chip_list_zone_df.iterrows():
+        
+        start = time.time()
+               
+        chip_red = chipping(mosaic_red.reshape((mosaic_red.shape[1],mosaic_red.shape[2])),chip)
+        chip_green = chipping(mosaic_green.reshape((mosaic_green.shape[1],mosaic_green.shape[2])),chip)
+        chip_blue = chipping(mosaic_blue.reshape((mosaic_blue.shape[1],mosaic_blue.shape[2])),chip)
+        
+        if scale_option == 1:
 
+            chip_red = scale_values(chip_red)
+            chip_green = scale_values(chip_green)
+            chip_blue = scale_values(chip_blue)
+
+        mosaic_rgb = np.stack([chip_red, 
+                               chip_green, 
+                               chip_blue], 
+                              axis=2)   
+        
+
+            
+            
     return   mosaic_rgb
 
 
@@ -213,30 +242,30 @@ with col8:
             
         else:
             # print(item)
-            mosaic_rgb  = aws_sentinel_chip(item,[lon,lat])
+            mosaic_rgb  = aws_sentinel_chip(item,[lon,lat],scale_option = 1)
             show_mosaic = 1
 
     if show_mosaic == 1:
         # st.write(mosaic_rgb)
-        st.write(f'total time to get the chip : {((time.time()-start)/60):.3f}')
+        st.write(f'total time to get the chip : {((time.time()-start)/60):.3f} minutes')
         st.image(mosaic_rgb, clamp=True, channels='RGB')
         
-        # start = time.time()
+        start = time.time()
         
-        # print(f'mosaic_rgb shape : {mosaic_rgb.shape}')
+        print(f'mosaic_rgb shape : {mosaic_rgb.shape}')
 
-        # mosaic_rgb = mosaic_rgb.astype(np.float32)
-        # sketch_byte = mosaic_rgb.tobytes()
+        mosaic_rgb = mosaic_rgb.astype(np.float32)
+        sketch_byte = mosaic_rgb.tobytes()
         
-        # resp = requests.post(prediction_url,files={'sketch': sketch_byte}) #  json=sketch_byte)# 
-        # response_classes = resp.json()
-        # st.write(resp)
+        resp = requests.post(prediction_url,files={'sketch': sketch_byte}) #  json=sketch_byte)# 
+        response_classes = resp.json()
+        st.write(resp)
 
-        # prediction = list(response_classes)
+        prediction = list(response_classes)
         
-        # st.write(response_classes)
+        st.write(response_classes)
         
-        # st.write(f'running model : {time.time()-start}')
+        st.write(f'running model : {time.time()-start}')
         
     elif show_mosaic == 0:
         st.write('No image returned. Please increase the considered period (start and end dates) or allow for more clouds (Maximum cloud cover).')
